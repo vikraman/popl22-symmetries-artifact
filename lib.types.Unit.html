@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>lib.types.Unit</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--rewriting</a> <a id="37" class="Symbol">#-}</a>
+
+<a id="42" class="Keyword">open</a> <a id="47" class="Keyword">import</a> <a id="54" href="lib.Basics.html" class="Module">lib.Basics</a>
+<a id="65" class="Keyword">open</a> <a id="70" class="Keyword">import</a> <a id="77" href="lib.types.Paths.html" class="Module">lib.types.Paths</a>
+
+<a id="94" class="Keyword">module</a> <a id="101" href="lib.types.Unit.html" class="Module">lib.types.Unit</a> <a id="116" class="Keyword">where</a>
+
+<a id="123" class="Keyword">pattern</a> <a id="tt"></a><a id="131" href="lib.types.Unit.html#131" class="InductiveConstructor">tt</a> <a id="134" class="Symbol">=</a> <a id="136" href="lib.Base.html#3044" class="InductiveConstructor">unit</a>
+
+<a id="⊙Unit"></a><a id="142" href="lib.types.Unit.html#142" class="Function">⊙Unit</a> <a id="148" class="Symbol">:</a> <a id="150" href="lib.Base.html#12358" class="Function">Ptd₀</a>
+<a id="155" href="lib.types.Unit.html#142" class="Function">⊙Unit</a> <a id="161" class="Symbol">=</a> <a id="163" href="lib.Base.html#12095" class="InductiveConstructor Operator">⊙[</a> <a id="166" href="lib.Base.html#3050" class="Function">Unit</a> <a id="171" href="lib.Base.html#12095" class="InductiveConstructor Operator">,</a> <a id="173" href="lib.Base.html#3044" class="InductiveConstructor">unit</a> <a id="178" href="lib.Base.html#12095" class="InductiveConstructor Operator">]</a>
+
+<a id="181" class="Comment">-- Unit is contractible</a>
+<a id="205" class="Keyword">instance</a>
+  <a id="Unit-level"></a><a id="216" href="lib.types.Unit.html#216" class="Function">Unit-level</a> <a id="227" class="Symbol">:</a> <a id="229" class="Symbol">{</a><a id="230" href="lib.types.Unit.html#230" class="Bound">n</a> <a id="232" class="Symbol">:</a> <a id="234" href="lib.Base.html#11616" class="Function">ℕ₋₂</a><a id="237" class="Symbol">}</a> <a id="239" class="Symbol">→</a> <a id="241" href="lib.NType.html#406" class="Record">has-level</a> <a id="251" href="lib.types.Unit.html#230" class="Bound">n</a> <a id="253" href="lib.Base.html#3050" class="Function">Unit</a>
+  <a id="260" href="lib.types.Unit.html#216" class="Function">Unit-level</a> <a id="271" class="Symbol">{</a><a id="272" class="Argument">n</a> <a id="274" class="Symbol">=</a> <a id="276" href="lib.Base.html#11573" class="InductiveConstructor">⟨-2⟩</a><a id="280" class="Symbol">}</a> <a id="282" class="Symbol">=</a> <a id="284" href="lib.NType.html#781" class="InductiveConstructor">has-level-in</a> <a id="297" class="Symbol">(</a><a id="298" href="lib.Base.html#3044" class="InductiveConstructor">unit</a> <a id="303" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="305" class="Symbol">λ</a> <a id="307" href="lib.types.Unit.html#307" class="Bound">y</a> <a id="309" class="Symbol">→</a> <a id="311" href="lib.Base.html#2004" class="InductiveConstructor">idp</a><a id="314" class="Symbol">)</a>
+  <a id="318" href="lib.types.Unit.html#216" class="Function">Unit-level</a> <a id="329" class="Symbol">{</a><a id="330" class="Argument">n</a> <a id="332" class="Symbol">=</a> <a id="334" href="lib.Base.html#11589" class="InductiveConstructor">S</a> <a id="336" href="lib.types.Unit.html#336" class="Bound">n</a><a id="337" class="Symbol">}</a> <a id="339" class="Symbol">=</a> <a id="341" href="lib.NType.html#2143" class="Function">raise-level</a> <a id="353" href="lib.types.Unit.html#336" class="Bound">n</a> <a id="355" href="lib.types.Unit.html#216" class="Function">Unit-level</a>
+</pre></body></html>

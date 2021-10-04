@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Pi.Examples.Adder</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--overlapping-instances</a> <a id="49" class="Symbol">#-}</a>
+
+<a id="54" class="Keyword">open</a> <a id="59" class="Keyword">import</a> <a id="66" href="HoTT.html" class="Module">HoTT</a> <a id="71" class="Keyword">hiding</a> <a id="78" class="Symbol">(</a><a id="79" href="lib.types.Nat.html#1866" class="Datatype Operator">_&lt;_</a> <a id="83" class="Symbol">;</a> <a id="85" href="lib.types.Nat.html#1894" class="InductiveConstructor">ltS</a> <a id="89" class="Symbol">;</a> <a id="91" href="lib.types.Nat.html#1922" class="InductiveConstructor">ltSR</a> <a id="96" class="Symbol">;</a> <a id="98" href="lib.types.Nat.html#291" class="Primitive Operator">_+_</a> <a id="102" class="Symbol">;</a> <a id="104" href="lib.types.Sigma.html#250" class="Function Operator">_×_</a><a id="107" class="Symbol">)</a>
+<a id="109" class="Keyword">import</a> <a id="116" href="lib.types.Nat.html" class="Module">lib.types.Nat</a> <a id="130" class="Symbol">as</a> <a id="133" class="Module">N</a>
+<a id="135" class="Keyword">import</a> <a id="142" href="lib.types.Sigma.html" class="Module">lib.types.Sigma</a> <a id="158" class="Symbol">as</a> <a id="161" class="Module">S</a>
+
+<a id="164" class="Keyword">open</a> <a id="169" class="Keyword">import</a> <a id="176" href="Pi.UFin.BAut.html" class="Module">Pi.UFin.BAut</a>
+<a id="189" class="Keyword">open</a> <a id="194" class="Keyword">import</a> <a id="201" href="Pi.Common.Misc.html" class="Module">Pi.Common.Misc</a>
+<a id="216" class="Keyword">open</a> <a id="221" class="Keyword">import</a> <a id="228" href="Pi.Common.Extra.html" class="Module">Pi.Common.Extra</a>
+
+<a id="245" class="Keyword">open</a> <a id="250" class="Keyword">import</a> <a id="257" href="Pi.Syntax.Pi%252B.Indexed.html" class="Module">Pi.Syntax.Pi+.Indexed</a> <a id="279" class="Symbol">as</a> <a id="282" class="Module">Pi+</a>
+<a id="286" class="Keyword">open</a> <a id="291" class="Keyword">import</a> <a id="298" href="Pi.Syntax.Pi%255E.html" class="Module">Pi.Syntax.Pi^</a> <a id="312" class="Symbol">as</a> <a id="315" class="Module">Pi^</a>
+<a id="319" class="Keyword">open</a> <a id="324" class="Keyword">import</a> <a id="331" href="Pi.Syntax.Pi%255EHelpers.html" class="Module">Pi.Syntax.Pi^Helpers</a> <a id="352" class="Symbol">as</a> <a id="355" class="Module">Pi^</a>
+<a id="359" class="Keyword">open</a> <a id="364" class="Keyword">import</a> <a id="371" href="Pi.Syntax.Pi.html" class="Module">Pi.Syntax.Pi</a> <a id="384" class="Symbol">as</a> <a id="387" class="Module">Pi</a>
+<a id="390" class="Keyword">open</a> <a id="395" class="Keyword">import</a> <a id="402" href="Pi.Equiv.Translation2.html" class="Module">Pi.Equiv.Translation2</a>
+<a id="424" class="Keyword">import</a> <a id="431" href="Pi.Equiv.Equiv1.html" class="Module">Pi.Equiv.Equiv1</a> <a id="447" class="Symbol">as</a> <a id="450" class="Module">Pi+</a>
+<a id="454" class="Keyword">import</a> <a id="461" href="Pi.Equiv.Equiv0Hat.html" class="Module">Pi.Equiv.Equiv0Hat</a> <a id="480" class="Symbol">as</a> <a id="483" class="Module">Pi^</a>
+<a id="487" class="Keyword">import</a> <a id="494" href="Pi.Equiv.Equiv1Hat.html" class="Module">Pi.Equiv.Equiv1Hat</a> <a id="513" class="Symbol">as</a> <a id="516" class="Module">Pi^</a>
+<a id="520" class="Keyword">import</a> <a id="527" href="Pi.Equiv.Equiv0Norm.html" class="Module">Pi.Equiv.Equiv0Norm</a> <a id="547" class="Symbol">as</a> <a id="550" class="Module">Pi^</a>
+<a id="554" class="Keyword">import</a> <a id="561" href="Pi.Equiv.Equiv1Norm.html" class="Module">Pi.Equiv.Equiv1Norm</a> <a id="581" class="Symbol">as</a> <a id="584" class="Module">Pi^</a>
+<a id="588" class="Keyword">open</a> <a id="593" class="Keyword">import</a> <a id="600" href="Pi.UFin.UFin.html" class="Module">Pi.UFin.UFin</a>
+<a id="613" class="Keyword">open</a> <a id="618" class="Keyword">import</a> <a id="625" href="Pi.UFin.Monoidal.html" class="Module">Pi.UFin.Monoidal</a>
+<a id="642" class="Keyword">open</a> <a id="647" class="Keyword">import</a> <a id="654" href="Pi.Common.FinHelpers.html" class="Module">Pi.Common.FinHelpers</a>
+<a id="675" class="Keyword">open</a> <a id="680" class="Keyword">import</a> <a id="687" href="Pi.Lehmer.FinExcept.html" class="Module">Pi.Lehmer.FinExcept</a>
+
+<a id="708" class="Keyword">module</a> <a id="715" href="Pi.Examples.Adder.html" class="Module">Pi.Examples.Adder</a> <a id="733" class="Keyword">where</a>
+
+<a id="740" class="Keyword">open</a> <a id="745" class="Keyword">import</a> <a id="752" href="Pi.Examples.Base.html" class="Module">Pi.Examples.Base</a>
+<a id="769" class="Keyword">open</a> <a id="774" class="Keyword">import</a> <a id="781" href="Pi.Examples.Toffoli.html" class="Module">Pi.Examples.Toffoli</a>
+
+<a id="802" class="Comment">{--
+
+Write another circuit that does this addition:
+
+0 -&gt; 0
+8 -&gt; 8
+n -&gt; n + 8 `mod` 16
+
+use algorithm in \cite{10.1145/775832.775915}
+
+when we normalize we should get the same as reset+
+        f1    f2      f3      f4         f5     f6         f7          f8
+            cx(3,0) cx(2,0) ccx(2,3,0) cx(1,0) ccx(1,3,0) ccx(1,2,0) cccx(1,2,3,0)
+0000 - 0000  0000    0000    0000       0000   0000       0000        0000
+0001 - 1001  0001    0001    0001       0001   0001       0001        0001
+0010 - 1010  1010    0010    0010       0010   0010       0010        0010
+0011 - 1011  0011    1011    0011       0011   0011       0011        0011
+0100 - 1100  1100    1100    1100       0100   0100       0100        0100
+0101 - 1101  0101    0101    0101       1101   0101       0101        0101
+0110 - 1110  1110    0110    0110       1110   1110       0110        0110
+0111 - 1111  0111    1111    0111       1111   0111       1111        0111
+1000 - 1000  1000    1000    1000       1000   1000       1000        1000
+1001 - 0001  1001    1001    1001       1001   1001       1001        1001
+1010 - 0010  0010    1010    1010       1010   1010       1010        1010
+1011 - 0011  1011    0011    1011       1011   1011       1011        1011
+1100 - 0100  0100    0100    0100       1100   1100       1100        1100
+1101 - 0101  1101    1101    1101       0101   1101       1101        1101
+1110 - 0110  0110    1110    1110       0110   0110       1110        1110
+1111 - 0111  1111    0111    1111       0111   1111       0111        1111
+
+circuit:
+
+  cccx(1,2,3,0);
+  ccx(1,2,0);
+  ccx(1,3,0);
+  cx(1,0);
+  ccx(2,3,0);
+  cx(2,0);
+  cx(3,0)
+
+check
+
+0000
+0001
+0010 1010
+0011 1011 0011 1011
+0100 1100
+0101 1101 0101 1101
+0110 1110 0110 1110
+0111 1111 0111 1111 0111 1111 0111 1111
+1000
+1001 0001
+1010 0010
+1011 0011 1011 0011
+1100 0100
+1101 0101 1101 0101
+1110 0110 1110 0110
+1111 0111 1111 0111 1111 0111 1111 0111
+
+--}</a>
+
+<a id="2726" class="Comment">-- adder4 : 𝔹 4 Pi.⟷₁ 𝔹 4</a>
+<a id="2752" class="Comment">-- adder4 = -- 0 x (1 x (2 x 3))</a>
+<a id="2785" class="Comment">--   swap⋆ ◎ -- (1 x (2 x 3)) x 0</a>
+<a id="2819" class="Comment">--   assocr⋆ ◎ -- 1 x ((2 x 3) x 0)</a>
+<a id="2855" class="Comment">--   (id⟷₁ ⊗ assocr⋆) ◎ -- 1 x (2 x (3 x 0))</a>
+<a id="2900" class="Comment">--   toffoli 4 ◎ -- 1 x (2 x (3 x 0))</a>
+<a id="2938" class="Comment">--   (id⟷₁ ⊗ (id⟷₁ ⊗ swap⋆)) ◎ -- 1 x (2 x (0 x 3)</a>
+<a id="2989" class="Comment">--   (id⟷₁ ⊗ assocl⋆) ◎ -- 1 x ((2 x 0) x 3)</a>
+<a id="3034" class="Comment">--   assocl⋆ ◎ -- (1 x (2 x 0)) x 3</a>
+<a id="3070" class="Comment">--   (toffoli 3 ⊗ id⟷₁) ◎ -- (1 x (2 x 0)) x 3</a>
+<a id="3117" class="Comment">--   assocr⋆ ◎ -- 1 x ((2 x 0) x 3)</a>
+<a id="3153" class="Comment">--   (id⟷₁ ⊗ swap⋆) ◎ -- 1 x (3 x (2 x 0))</a>
+<a id="3196" class="Comment">--   (id⟷₁ ⊗ (id⟷₁ ⊗ swap⋆)) ◎ -- 1 x (3 x (0 x 2))</a>
+<a id="3248" class="Comment">--   (id⟷₁ ⊗ assocl⋆) ◎ -- 1 x ((3 x 0) x 2)</a>
+<a id="3293" class="Comment">--   assocl⋆ ◎ -- (1 x (3 x 0)) x 2</a>
+<a id="3329" class="Comment">--   (toffoli 3 ⊗ id⟷₁) ◎ -- (1 x (3 x 0)) x 2</a>
+<a id="3376" class="Comment">--   ((id⟷₁ ⊗ swap⋆) ⊗ id⟷₁) ◎ -- (1 x (0 x 3)) x 2</a>
+<a id="3428" class="Comment">--   (assocl⋆ ⊗ id⟷₁) ◎ -- ((1 x 0) x 3) x 2</a>
+<a id="3473" class="Comment">--   ((cnot ⊗ id⟷₁) ⊗ id⟷₁) ◎ -- ((1 x 0) x 3) x 2</a>
+<a id="3524" class="Comment">--   assocr⋆ ◎ -- (1 x 0) x (3 x 2)</a>
+<a id="3560" class="Comment">--   (swap⋆ ⊗ id⟷₁) ◎ -- (0 x 1) x (3 x 2)</a>
+<a id="3603" class="Comment">--   swap⋆ ◎ -- (3 x 2) x (0 x 1)</a>
+<a id="3637" class="Comment">--   assocl⋆ ◎ -- ((3 x 2) x 0) x 1</a>
+<a id="3673" class="Comment">--   (assocr⋆ ⊗ id⟷₁) ◎ -- (3 x (2 x 0)) x 1</a>
+<a id="3718" class="Comment">--   (toffoli 3 ⊗ id⟷₁) ◎ -- (3 x (2 x 0)) x 1</a>
+<a id="3765" class="Comment">--   ((id⟷₁ ⊗ cnot) ⊗ id⟷₁) ◎ -- (3 x (2 x 0)) x 1</a>
+<a id="3816" class="Comment">--   ((id⟷₁ ⊗ swap⋆) ⊗ id⟷₁) ◎ -- (3 x (0 x 2)) x 1</a>
+<a id="3868" class="Comment">--   (assocl⋆ ⊗ id⟷₁) ◎ -- ((3 x 0) x 2) x 1</a>
+<a id="3913" class="Comment">--   ((cnot ⊗ id⟷₁) ⊗ id⟷₁) ◎ -- ((3 x 0) x 2) x 1</a>
+<a id="3964" class="Comment">--   ((swap⋆ ⊗ id⟷₁) ⊗ id⟷₁) ◎ -- ((0 x 3) x 2) x 1</a>
+<a id="4016" class="Comment">--   (assocr⋆ ⊗ id⟷₁) ◎ -- (0 x (3 x 2)) x 1</a>
+<a id="4061" class="Comment">--   assocr⋆ ◎ -- 0 x ((3 x 2) x 1)</a>
+<a id="4097" class="Comment">--   (id⟷₁ ⊗ swap⋆) ◎ -- 0 x (1 x (3 x 2))</a>
+<a id="4140" class="Comment">--   (id⟷₁ ⊗ (id⟷₁ ⊗ swap⋆)) -- 0 x (1 x (2 x 3))</a>
+
+<a id="4191" class="Comment">-- adder4+ : Pi^.quote^₀ 16 Pi+.⟷₁ Pi^.quote^₀ 16</a>
+<a id="4241" class="Comment">-- adder4+ = (Pi^.quote^₁ ∘ Pi^.quoteNorm₁ idp ∘ Pi^.evalNorm₁ ∘ eval₁) adder4</a>
+
+<a id="4321" class="Comment">-- adder4+test : Fin 16 → Fin 16</a>
+<a id="4354" class="Comment">-- -- adder4+test = –&gt; (Pi+.eval₁ (adder+))</a>
+<a id="4398" class="Comment">-- adder4+test = –&gt; (Pi^.evalNorm₁ (eval₁ adder4))</a>
+
+<a id="adder31"></a><a id="4450" href="Pi.Examples.Adder.html#4450" class="Function">adder31</a> <a id="4458" class="Symbol">:</a> <a id="4460" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4462" class="Number">3</a> <a id="4464" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="4470" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4472" class="Number">3</a>
+<a id="4474" href="Pi.Examples.Adder.html#4450" class="Function">adder31</a> <a id="4482" class="Symbol">=</a> <a id="4484" class="Comment">-- 0 * (1 * 2)</a>
+  <a id="4501" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a> <a id="4507" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4509" class="Comment">-- (1 * 2) * 0</a>
+  <a id="4526" class="Symbol">(</a><a id="4527" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a> <a id="4533" href="Pi.Syntax.Pi.html#1281" class="InductiveConstructor Operator">⊗</a> <a id="4535" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a><a id="4539" class="Symbol">)</a> <a id="4541" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4543" class="Comment">-- (2 * 1) * 0</a>
+  <a id="4560" href="Pi.Syntax.Pi.html#766" class="InductiveConstructor">assocr⋆</a> <a id="4568" class="Comment">-- 2 * (1 * 0)</a>
+
+<a id="adder32"></a><a id="4584" href="Pi.Examples.Adder.html#4584" class="Function">adder32</a> <a id="4592" class="Symbol">:</a> <a id="4594" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4596" class="Number">3</a> <a id="4598" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="4604" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4606" class="Number">3</a>
+<a id="4608" href="Pi.Examples.Adder.html#4584" class="Function">adder32</a> <a id="4616" class="Symbol">=</a>
+  <a id="4620" href="Pi.Examples.Toffoli.html#2140" class="Function">toffoli</a> <a id="4628" class="Number">3</a> <a id="4630" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4632" class="Comment">-- 2 * (1 * 0)</a>
+  <a id="4649" class="Symbol">(</a><a id="4650" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a> <a id="4655" href="Pi.Syntax.Pi.html#1281" class="InductiveConstructor Operator">⊗</a> <a id="4657" href="Pi.Examples.Toffoli.html#1736" class="Function">cnot</a><a id="4661" class="Symbol">)</a> <a id="4663" class="Comment">-- 2 * (1 * 0)</a>
+
+<a id="adder33"></a><a id="4679" href="Pi.Examples.Adder.html#4679" class="Function">adder33</a> <a id="4687" class="Symbol">:</a> <a id="4689" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4691" class="Number">3</a> <a id="4693" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="4699" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4701" class="Number">3</a>
+<a id="4703" href="Pi.Examples.Adder.html#4679" class="Function">adder33</a> <a id="4711" class="Symbol">=</a>
+  <a id="4715" href="Pi.Syntax.Pi.html#720" class="InductiveConstructor">assocl⋆</a> <a id="4723" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4725" class="Comment">-- (2 * 1) * 0</a>
+  <a id="4742" class="Symbol">(</a><a id="4743" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a> <a id="4749" href="Pi.Syntax.Pi.html#1281" class="InductiveConstructor Operator">⊗</a> <a id="4751" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a><a id="4755" class="Symbol">)</a> <a id="4757" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4759" class="Comment">-- (1 * 2) * 0</a>
+  <a id="4776" href="Pi.Syntax.Pi.html#766" class="InductiveConstructor">assocr⋆</a> <a id="4784" class="Comment">-- 1 * (2 * 0)</a>
+
+<a id="adder34"></a><a id="4800" href="Pi.Examples.Adder.html#4800" class="Function">adder34</a> <a id="4808" class="Symbol">:</a> <a id="4810" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4812" class="Number">3</a> <a id="4814" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="4820" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4822" class="Number">3</a>
+<a id="4824" href="Pi.Examples.Adder.html#4800" class="Function">adder34</a> <a id="4832" class="Symbol">=</a>
+  <a id="4836" class="Symbol">(</a><a id="4837" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a> <a id="4842" href="Pi.Syntax.Pi.html#1281" class="InductiveConstructor Operator">⊗</a> <a id="4844" href="Pi.Examples.Toffoli.html#1736" class="Function">cnot</a><a id="4848" class="Symbol">)</a> <a id="4850" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4852" class="Comment">-- 1 * (2 * 0)</a>
+  <a id="4869" href="Pi.Syntax.Pi.html#720" class="InductiveConstructor">assocl⋆</a> <a id="4877" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="4879" class="Comment">-- (1 * 2) * 0</a>
+  <a id="4896" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a> <a id="4902" class="Comment">-- 0 * (1 * 2)</a>
+
+<a id="adder3"></a><a id="4918" href="Pi.Examples.Adder.html#4918" class="Function">adder3</a> <a id="4925" class="Symbol">:</a> <a id="4927" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4929" class="Number">3</a> <a id="4931" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="4937" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="4939" class="Number">3</a>
+<a id="4941" href="Pi.Examples.Adder.html#4918" class="Function">adder3</a> <a id="4948" class="Symbol">=</a>
+  <a id="4952" href="Pi.Examples.Adder.html#4450" class="Function">adder31</a> <a id="4960" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a>
+  <a id="4964" href="Pi.Examples.Adder.html#4584" class="Function">adder32</a> <a id="4972" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a>
+  <a id="4976" href="Pi.Examples.Adder.html#4679" class="Function">adder33</a> <a id="4984" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a>
+  <a id="4988" href="Pi.Examples.Adder.html#4800" class="Function">adder34</a>
+
+<a id="4997" class="Comment">-- adder3+test : Fin 8 → Fin 8</a>
+<a id="5028" class="Comment">-- adder4+test = –&gt; (Pi+.eval₁ (adder3+))</a>
+<a id="5070" class="Comment">-- adder3+test = –&gt; (Pi^.evalNorm₁ (eval₁ adder3))</a>
+
+<a id="5122" class="Keyword">open</a> <a id="5127" class="Keyword">import</a> <a id="5134" href="Pi.Lehmer.Lehmer2.html" class="Module">Pi.Lehmer.Lehmer2</a>
+<a id="5152" class="Keyword">open</a> <a id="5157" class="Keyword">import</a> <a id="5164" href="Pi.Equiv.Equiv1NormHelpers.html" class="Module">Pi.Equiv.Equiv1NormHelpers</a>
+<a id="5191" class="Keyword">open</a> <a id="5196" class="Keyword">import</a> <a id="5203" href="Pi.Coxeter.Lehmer2CoxeterEquiv.html" class="Module">Pi.Coxeter.Lehmer2CoxeterEquiv</a>
+
+<a id="fastadder3+test"></a><a id="5235" href="Pi.Examples.Adder.html#5235" class="Function">fastadder3+test</a> <a id="5251" class="Symbol">:</a> <a id="5253" href="Pi.Lehmer.Lehmer2.html#92" class="Function">Lehmer</a> <a id="5260" class="Number">7</a>
+<a id="5262" href="Pi.Examples.Adder.html#5235" class="Function">fastadder3+test</a> <a id="5278" class="Symbol">=</a> <a id="5280" class="Symbol">(</a><a id="5281" href="Pi.Equiv.Equiv1Norm.html#1852" class="Function">Pi^.fastevalNorm₁</a> <a id="5299" class="Symbol">(</a><a id="5300" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="5306" href="Pi.Examples.Adder.html#4918" class="Function">adder3</a><a id="5312" class="Symbol">))</a>
+
+<a id="fastadder3+test2"></a><a id="5316" href="Pi.Examples.Adder.html#5316" class="Function">fastadder3+test2</a> <a id="5333" class="Symbol">=</a> <a id="5335" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="5341" href="Pi.Examples.Adder.html#4918" class="Function">adder3</a>
+
+<a id="fastadder3+test3"></a><a id="5349" href="Pi.Examples.Adder.html#5349" class="Function">fastadder3+test3</a> <a id="5366" class="Symbol">=</a> <a id="5368" class="Symbol">(</a><a id="5369" href="Pi.Equiv.Equiv1NormHelpers.html#4030" class="Function">pi^2list</a> <a id="5378" href="Pi.Examples.Adder.html#5316" class="Function">fastadder3+test2</a><a id="5394" class="Symbol">)</a>
+
+<a id="fastadder3+test4"></a><a id="5397" href="Pi.Examples.Adder.html#5397" class="Function">fastadder3+test4</a> <a id="5414" class="Symbol">=</a> <a id="5416" href="Pi.Coxeter.Lehmer2CoxeterEquiv.html#674" class="Function">immersion⁻¹</a> <a id="5428" href="Pi.Examples.Adder.html#5349" class="Function">fastadder3+test3</a>
+
+<a id="adderPerm"></a><a id="5446" href="Pi.Examples.Adder.html#5446" class="Function">adderPerm</a> <a id="5456" class="Symbol">:</a> <a id="5458" href="Pi.UFin.BAut.html#1234" class="Function">Aut</a> <a id="5462" class="Symbol">(</a><a id="5463" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="5467" class="Number">8</a><a id="5468" class="Symbol">)</a>
+<a id="5470" href="Pi.Examples.Adder.html#5446" class="Function">adderPerm</a> <a id="5480" class="Symbol">=</a> <a id="5482" href="lib.Equivalence.html#4643" class="Function">equiv</a> <a id="5488" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5490" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5492" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5496" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a>
+  <a id="5502" class="Keyword">where</a> <a id="5508" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5510" class="Symbol">:</a> <a id="5512" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="5516" class="Number">8</a> <a id="5518" class="Symbol">→</a> <a id="5520" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="5524" class="Number">8</a>
+        <a id="5534" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5536" class="Symbol">(</a><a id="5537" href="lib.Base.html#6351" class="InductiveConstructor">O</a> <a id="5539" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5541" href="Pi.Examples.Adder.html#5541" class="Bound">ϕ</a><a id="5542" class="Symbol">)</a> <a id="5544" class="Symbol">=</a> <a id="5546" class="Number">0</a>
+        <a id="5556" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5558" class="Symbol">(</a><a id="5559" class="Number">1</a> <a id="5561" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5563" href="Pi.Examples.Adder.html#5563" class="Bound">ϕ</a><a id="5564" class="Symbol">)</a> <a id="5566" class="Symbol">=</a> <a id="5568" class="Number">5</a>
+        <a id="5578" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5580" class="Symbol">(</a><a id="5581" class="Number">2</a> <a id="5583" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5585" href="Pi.Examples.Adder.html#5585" class="Bound">ϕ</a><a id="5586" class="Symbol">)</a> <a id="5588" class="Symbol">=</a> <a id="5590" class="Number">6</a>
+        <a id="5600" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5602" class="Symbol">(</a><a id="5603" class="Number">3</a> <a id="5605" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5607" href="Pi.Examples.Adder.html#5607" class="Bound">ϕ</a><a id="5608" class="Symbol">)</a> <a id="5610" class="Symbol">=</a> <a id="5612" class="Number">7</a>
+        <a id="5622" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5624" class="Symbol">(</a><a id="5625" class="Number">4</a> <a id="5627" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5629" href="Pi.Examples.Adder.html#5629" class="Bound">ϕ</a><a id="5630" class="Symbol">)</a> <a id="5632" class="Symbol">=</a> <a id="5634" class="Number">4</a>
+        <a id="5644" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5646" class="Symbol">(</a><a id="5647" class="Number">5</a> <a id="5649" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5651" href="Pi.Examples.Adder.html#5651" class="Bound">ϕ</a><a id="5652" class="Symbol">)</a> <a id="5654" class="Symbol">=</a> <a id="5656" class="Number">1</a>
+        <a id="5666" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5668" class="Symbol">(</a><a id="5669" class="Number">6</a> <a id="5671" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5673" href="Pi.Examples.Adder.html#5673" class="Bound">ϕ</a><a id="5674" class="Symbol">)</a> <a id="5676" class="Symbol">=</a> <a id="5678" class="Number">2</a>
+        <a id="5688" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5690" class="Symbol">(</a><a id="5691" class="Number">7</a> <a id="5693" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5695" href="Pi.Examples.Adder.html#5695" class="Bound">ϕ</a><a id="5696" class="Symbol">)</a> <a id="5698" class="Symbol">=</a> <a id="5700" class="Number">3</a>
+        <a id="5710" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5712" class="Symbol">(</a><a id="5713" href="Pi.Examples.Adder.html#5713" class="Bound">n</a> <a id="5715" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5717" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5724" class="Symbol">(</a><a id="5725" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5732" class="Symbol">(</a><a id="5733" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5740" class="Symbol">(</a><a id="5741" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5748" class="Symbol">(</a><a id="5749" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5756" class="Symbol">(</a><a id="5757" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5764" class="Symbol">(</a><a id="5765" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5772" class="Symbol">(</a><a id="5773" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="5780" class="Symbol">()))))))))</a>
+        <a id="5799" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5803" class="Symbol">:</a> <a id="5805" class="Symbol">(</a><a id="5806" href="Pi.Examples.Adder.html#5806" class="Bound">x</a> <a id="5808" class="Symbol">:</a> <a id="5810" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="5814" class="Number">8</a><a id="5815" class="Symbol">)</a> <a id="5817" class="Symbol">→</a> <a id="5819" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5821" class="Symbol">(</a><a id="5822" href="Pi.Examples.Adder.html#5508" class="Function">f</a> <a id="5824" href="Pi.Examples.Adder.html#5806" class="Bound">x</a><a id="5825" class="Symbol">)</a> <a id="5827" href="lib.Base.html#1953" class="Datatype Operator">==</a> <a id="5830" href="Pi.Examples.Adder.html#5806" class="Bound">x</a>
+        <a id="5840" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5844" class="Symbol">(</a><a id="5845" href="lib.Base.html#6351" class="InductiveConstructor">O</a> <a id="5847" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5849" href="Pi.Examples.Adder.html#5849" class="Bound">ϕ</a><a id="5850" class="Symbol">)</a> <a id="5852" class="Symbol">=</a> <a id="5854" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="5859" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="5871" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5875" class="Symbol">(</a><a id="5876" class="Number">1</a> <a id="5878" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5880" href="Pi.Examples.Adder.html#5880" class="Bound">ϕ</a><a id="5881" class="Symbol">)</a> <a id="5883" class="Symbol">=</a> <a id="5885" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="5890" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="5902" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5906" class="Symbol">(</a><a id="5907" class="Number">2</a> <a id="5909" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5911" href="Pi.Examples.Adder.html#5911" class="Bound">ϕ</a><a id="5912" class="Symbol">)</a> <a id="5914" class="Symbol">=</a> <a id="5916" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="5921" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="5933" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5937" class="Symbol">(</a><a id="5938" class="Number">3</a> <a id="5940" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5942" href="Pi.Examples.Adder.html#5942" class="Bound">ϕ</a><a id="5943" class="Symbol">)</a> <a id="5945" class="Symbol">=</a> <a id="5947" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="5952" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="5964" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5968" class="Symbol">(</a><a id="5969" class="Number">4</a> <a id="5971" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="5973" href="Pi.Examples.Adder.html#5973" class="Bound">ϕ</a><a id="5974" class="Symbol">)</a> <a id="5976" class="Symbol">=</a> <a id="5978" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="5983" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="5995" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="5999" class="Symbol">(</a><a id="6000" class="Number">5</a> <a id="6002" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="6004" href="Pi.Examples.Adder.html#6004" class="Bound">ϕ</a><a id="6005" class="Symbol">)</a> <a id="6007" class="Symbol">=</a> <a id="6009" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="6014" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="6026" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="6030" class="Symbol">(</a><a id="6031" class="Number">6</a> <a id="6033" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="6035" href="Pi.Examples.Adder.html#6035" class="Bound">ϕ</a><a id="6036" class="Symbol">)</a> <a id="6038" class="Symbol">=</a> <a id="6040" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="6045" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="6057" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="6061" class="Symbol">(</a><a id="6062" class="Number">7</a> <a id="6064" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="6066" href="Pi.Examples.Adder.html#6066" class="Bound">ϕ</a><a id="6067" class="Symbol">)</a> <a id="6069" class="Symbol">=</a> <a id="6071" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="6076" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="6088" href="Pi.Examples.Adder.html#5799" class="Function">f-f</a> <a id="6092" class="Symbol">(</a><a id="6093" href="Pi.Examples.Adder.html#6093" class="Bound">n</a> <a id="6095" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="6097" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6104" class="Symbol">(</a><a id="6105" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6112" class="Symbol">(</a><a id="6113" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6120" class="Symbol">(</a><a id="6121" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6128" class="Symbol">(</a><a id="6129" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6136" class="Symbol">(</a><a id="6137" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6144" class="Symbol">(</a><a id="6145" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6152" class="Symbol">(</a><a id="6153" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="6160" class="Symbol">()))))))))</a>
+
+<a id="adderPerm^"></a><a id="6172" href="Pi.Examples.Adder.html#6172" class="Function">adderPerm^</a> <a id="6183" class="Symbol">:</a> <a id="6185" class="Number">8</a> <a id="6187" href="Pi.Syntax.Pi%255E.html#628" class="Datatype Operator">Pi^.⟷₁^</a> <a id="6195" class="Number">8</a>
+<a id="6197" href="Pi.Examples.Adder.html#6172" class="Function">adderPerm^</a> <a id="6208" class="Symbol">=</a> <a id="6210" href="Pi.Equiv.Equiv1Norm.html#1926" class="Function">Pi^.quoteNorm₁</a> <a id="6225" href="lib.Base.html#2004" class="InductiveConstructor">idp</a> <a id="6229" href="Pi.Examples.Adder.html#5446" class="Function">adderPerm</a>
+
+<a id="adderPerm+"></a><a id="6240" href="Pi.Examples.Adder.html#6240" class="Function">adderPerm+</a> <a id="6251" class="Symbol">:</a> <a id="6253" href="Pi.Examples.Base.html#2212" class="Function">𝟠+</a> <a id="6256" href="Pi.Syntax.Pi%252B.Indexed.html#523" class="Datatype Operator">Pi+.⟷₁</a> <a id="6263" href="Pi.Examples.Base.html#2212" class="Function">𝟠+</a>
+<a id="6266" href="Pi.Examples.Adder.html#6240" class="Function">adderPerm+</a> <a id="6277" class="Symbol">=</a> <a id="6279" href="Pi.Equiv.Equiv1Hat.html#663" class="Function">Pi^.quote^₁</a> <a id="6291" href="Pi.Examples.Adder.html#6172" class="Function">adderPerm^</a>
+
+<a id="fastadder+test231"></a><a id="6303" href="Pi.Examples.Adder.html#6303" class="Function">fastadder+test231</a> <a id="6321" class="Symbol">=</a> <a id="6323" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6329" href="Pi.Examples.Adder.html#4450" class="Function">adder31</a>
+
+<a id="fastadder+test331"></a><a id="6338" href="Pi.Examples.Adder.html#6338" class="Function">fastadder+test331</a> <a id="6356" class="Symbol">=</a> <a id="6358" class="Symbol">(</a><a id="6359" href="Pi.Equiv.Equiv1NormHelpers.html#4030" class="Function">pi^2list</a> <a id="6368" href="Pi.Examples.Adder.html#6303" class="Function">fastadder+test231</a><a id="6385" class="Symbol">)</a>
+
+<a id="fastadder+test431"></a><a id="6388" href="Pi.Examples.Adder.html#6388" class="Function">fastadder+test431</a> <a id="6406" class="Symbol">=</a> <a id="6408" href="Pi.Coxeter.Lehmer2CoxeterEquiv.html#674" class="Function">immersion⁻¹</a> <a id="6420" href="Pi.Examples.Adder.html#6338" class="Function">fastadder+test331</a>
+
+<a id="fastadder+test31"></a><a id="6439" href="Pi.Examples.Adder.html#6439" class="Function">fastadder+test31</a> <a id="6456" class="Symbol">=</a> <a id="6458" href="Pi.Equiv.Equiv1Norm.html#1852" class="Function">Pi^.fastevalNorm₁</a> <a id="6476" class="Symbol">(</a><a id="6477" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6483" href="Pi.Examples.Adder.html#4450" class="Function">adder31</a><a id="6490" class="Symbol">)</a>
+<a id="slowadder+test31"></a><a id="6492" href="Pi.Examples.Adder.html#6492" class="Function">slowadder+test31</a> <a id="6509" class="Symbol">=</a> <a id="6511" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="6525" class="Symbol">(</a><a id="6526" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6532" href="Pi.Examples.Adder.html#4450" class="Function">adder31</a><a id="6539" class="Symbol">)</a>
+
+<a id="fastadder+test32"></a><a id="6542" href="Pi.Examples.Adder.html#6542" class="Function">fastadder+test32</a> <a id="6559" class="Symbol">=</a> <a id="6561" href="Pi.Equiv.Equiv1Norm.html#1852" class="Function">Pi^.fastevalNorm₁</a> <a id="6579" class="Symbol">(</a><a id="6580" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6586" href="Pi.Examples.Adder.html#4584" class="Function">adder32</a><a id="6593" class="Symbol">)</a>
+<a id="slowadder+test32"></a><a id="6595" href="Pi.Examples.Adder.html#6595" class="Function">slowadder+test32</a> <a id="6612" class="Symbol">=</a> <a id="6614" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="6628" class="Symbol">(</a><a id="6629" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6635" href="Pi.Examples.Adder.html#4584" class="Function">adder32</a><a id="6642" class="Symbol">)</a>
+
+<a id="fastadder+test33"></a><a id="6645" href="Pi.Examples.Adder.html#6645" class="Function">fastadder+test33</a> <a id="6662" class="Symbol">=</a> <a id="6664" href="Pi.Equiv.Equiv1Norm.html#1852" class="Function">Pi^.fastevalNorm₁</a> <a id="6682" class="Symbol">(</a><a id="6683" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6689" href="Pi.Examples.Adder.html#4679" class="Function">adder33</a><a id="6696" class="Symbol">)</a>
+<a id="slowadder+test33"></a><a id="6698" href="Pi.Examples.Adder.html#6698" class="Function">slowadder+test33</a> <a id="6715" class="Symbol">=</a> <a id="6717" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="6731" class="Symbol">(</a><a id="6732" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6738" href="Pi.Examples.Adder.html#4679" class="Function">adder33</a><a id="6745" class="Symbol">)</a>
+
+<a id="fastadder+test34"></a><a id="6748" href="Pi.Examples.Adder.html#6748" class="Function">fastadder+test34</a> <a id="6765" class="Symbol">=</a> <a id="6767" href="Pi.Equiv.Equiv1Norm.html#1852" class="Function">Pi^.fastevalNorm₁</a> <a id="6785" class="Symbol">(</a><a id="6786" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6792" href="Pi.Examples.Adder.html#4800" class="Function">adder34</a><a id="6799" class="Symbol">)</a>
+<a id="slowadder+test34"></a><a id="6801" href="Pi.Examples.Adder.html#6801" class="Function">slowadder+test34</a> <a id="6818" class="Symbol">=</a> <a id="6820" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="6834" class="Symbol">(</a><a id="6835" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="6841" href="Pi.Examples.Adder.html#4800" class="Function">adder34</a><a id="6848" class="Symbol">)</a>
+
+<a id="adder+test34-perm"></a><a id="6851" href="Pi.Examples.Adder.html#6851" class="Function">adder+test34-perm</a> <a id="6869" class="Symbol">:</a> <a id="6871" href="Pi.UFin.BAut.html#1234" class="Function">Aut</a> <a id="6875" class="Symbol">(</a><a id="6876" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="6880" class="Number">8</a><a id="6881" class="Symbol">)</a>
+<a id="6883" href="Pi.Examples.Adder.html#6851" class="Function">adder+test34-perm</a> <a id="6901" class="Symbol">=</a>
+  <a id="6905" href="Pi.Examples.Adder.html#6801" class="Function">slowadder+test34</a> <a id="6922" href="lib.Equivalence.html#6100" class="Function Operator">∘e</a> <a id="6925" href="Pi.Examples.Adder.html#6698" class="Function">slowadder+test33</a> <a id="6942" href="lib.Equivalence.html#6100" class="Function Operator">∘e</a> <a id="6945" href="Pi.Examples.Adder.html#6595" class="Function">slowadder+test32</a> <a id="6962" href="lib.Equivalence.html#6100" class="Function Operator">∘e</a> <a id="6965" href="Pi.Examples.Adder.html#6492" class="Function">slowadder+test31</a>
+  <a id="6984" class="Comment">-- compose in reverse order</a>
+
+<a id="adder+test34+"></a><a id="7013" href="Pi.Examples.Adder.html#7013" class="Function">adder+test34+</a> <a id="7027" class="Symbol">:</a> <a id="7029" href="Pi.Equiv.Equiv0Hat.html#519" class="Function">Pi^.quote^₀</a> <a id="7041" class="Number">8</a> <a id="7043" href="Pi.Syntax.Pi%252B.Indexed.html#523" class="Datatype Operator">Pi+.⟷₁</a> <a id="7050" href="Pi.Equiv.Equiv0Hat.html#519" class="Function">Pi^.quote^₀</a> <a id="7062" class="Number">8</a>
+<a id="7064" href="Pi.Examples.Adder.html#7013" class="Function">adder+test34+</a> <a id="7078" class="Symbol">=</a> <a id="7080" class="Symbol">(</a><a id="7081" href="Pi.Equiv.Equiv1Hat.html#663" class="Function">Pi^.quote^₁</a> <a id="7093" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="7095" href="Pi.Equiv.Equiv1Norm.html#1926" class="Function">Pi^.quoteNorm₁</a> <a id="7110" href="lib.Base.html#2004" class="InductiveConstructor">idp</a><a id="7113" class="Symbol">)</a> <a id="7115" href="Pi.Examples.Adder.html#6851" class="Function">adder+test34-perm</a>
+
+<a id="adder+test34+-full"></a><a id="7134" href="Pi.Examples.Adder.html#7134" class="Function">adder+test34+-full</a> <a id="7153" class="Symbol">:</a> <a id="7155" href="Pi.Equiv.Equiv0Hat.html#519" class="Function">Pi^.quote^₀</a> <a id="7167" class="Number">8</a> <a id="7169" href="Pi.Syntax.Pi%252B.Indexed.html#523" class="Datatype Operator">Pi+.⟷₁</a> <a id="7176" href="Pi.Equiv.Equiv0Hat.html#519" class="Function">Pi^.quote^₀</a> <a id="7188" class="Number">8</a>
+<a id="7190" href="Pi.Examples.Adder.html#7134" class="Function">adder+test34+-full</a> <a id="7209" class="Symbol">=</a> <a id="7211" class="Symbol">(</a><a id="7212" href="Pi.Equiv.Equiv1Hat.html#663" class="Function">Pi^.quote^₁</a> <a id="7224" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="7226" href="Pi.Equiv.Equiv1Norm.html#1926" class="Function">Pi^.quoteNorm₁</a> <a id="7241" href="lib.Base.html#2004" class="InductiveConstructor">idp</a> <a id="7245" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="7247" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="7261" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="7263" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a><a id="7268" class="Symbol">)</a> <a id="7270" href="Pi.Examples.Adder.html#4918" class="Function">adder3</a>
+
+<a id="7278" class="Keyword">open</a> <a id="7283" class="Keyword">import</a> <a id="7290" href="Pi.Examples.Interp.html" class="Module">Pi.Examples.Interp</a>
+
+<a id="7310" class="Keyword">private</a>
+  <a id="x"></a><a id="7320" href="Pi.Examples.Adder.html#7320" class="Function">x</a> <a id="7322" class="Symbol">=</a> <a id="7324" href="Pi.Examples.Interp.html#3141" class="Function">interp+-elems</a> <a id="7338" href="Pi.Examples.Adder.html#7013" class="Function">adder+test34+</a>
+  <a id="y"></a><a id="7354" href="Pi.Examples.Adder.html#7354" class="Function">y</a> <a id="7356" class="Symbol">=</a> <a id="7358" href="Pi.Examples.Interp.html#3141" class="Function">interp+-elems</a> <a id="7372" href="Pi.Examples.Adder.html#7134" class="Function">adder+test34+-full</a>
+
+<a id="7392" class="Comment">{-
+(true , inr (inr (inr (inr true)))) ::
+(inr true , inr (inr (inr (inr (inr true))))) ::
+(inr (inr true) , inr (inr (inr (inr (inr (inr true)))))) ::
+(inr (inr (inr true)) , inr (inr (inr true))) ::
+(inr (inr (inr (inr true))) , true) ::
+(inr (inr (inr (inr (inr true)))) , inr true) ::
+(inr (inr (inr (inr (inr (inr true))))) , inr (inr true)) ::
+(inr (inr (inr (inr (inr (inr (inr true)))))) ,
+ inr (inr (inr (inr (inr (inr (inr true)))))))
+:: nil
+
+(true , inr (inr (inr (inr true)))) ::
+(inr true , inr (inr (inr (inr (inr true))))) ::
+(inr (inr true) , inr (inr (inr (inr (inr (inr true)))))) ::
+(inr (inr (inr true)) , inr (inr (inr true))) ::
+(inr (inr (inr (inr true))) , true) ::
+(inr (inr (inr (inr (inr true)))) , inr true) ::
+(inr (inr (inr (inr (inr (inr true))))) , inr (inr true)) ::
+(inr (inr (inr (inr (inr (inr (inr true)))))) ,
+ inr (inr (inr (inr (inr (inr (inr true)))))))
+:: nil
+
+-}</a>
+
+<a id="8299" class="Comment">{-
+adder3:
+
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕
+ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊)
+◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎ id⟷₁
+
+-}</a>
+</pre></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>lib.groups.FreeGroup</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--rewriting</a> <a id="37" class="Symbol">#-}</a>
+
+<a id="42" class="Keyword">open</a> <a id="47" class="Keyword">import</a> <a id="54" href="lib.Basics.html" class="Module">lib.Basics</a>
+<a id="65" class="Keyword">open</a> <a id="70" class="Keyword">import</a> <a id="77" href="lib.types.Empty.html" class="Module">lib.types.Empty</a>
+<a id="93" class="Keyword">open</a> <a id="98" class="Keyword">import</a> <a id="105" href="lib.types.Group.html" class="Module">lib.types.Group</a>
+<a id="121" class="Keyword">open</a> <a id="126" class="Keyword">import</a> <a id="133" href="lib.types.Word.html" class="Module">lib.types.Word</a>
+<a id="148" class="Keyword">open</a> <a id="153" class="Keyword">import</a> <a id="160" href="lib.groups.GeneratedGroup.html" class="Module">lib.groups.GeneratedGroup</a>
+<a id="186" class="Keyword">open</a> <a id="191" class="Keyword">import</a> <a id="198" href="lib.groups.Homomorphism.html" class="Module">lib.groups.Homomorphism</a>
+
+<a id="223" class="Keyword">module</a> <a id="230" href="lib.groups.FreeGroup.html" class="Module">lib.groups.FreeGroup</a> <a id="251" class="Keyword">where</a>
+
+<a id="258" class="Keyword">module</a> <a id="FreeGroup"></a><a id="265" href="lib.groups.FreeGroup.html#265" class="Module">FreeGroup</a> <a id="275" class="Symbol">{</a><a id="276" href="lib.groups.FreeGroup.html#276" class="Bound">i</a><a id="277" class="Symbol">}</a> <a id="279" class="Symbol">(</a><a id="280" href="lib.groups.FreeGroup.html#280" class="Bound">A</a> <a id="282" class="Symbol">:</a> <a id="284" href="lib.Base.html#1144" class="Function">Type</a> <a id="289" href="lib.groups.FreeGroup.html#276" class="Bound">i</a><a id="290" class="Symbol">)</a> <a id="292" class="Keyword">where</a>
+
+  <a id="301" class="Keyword">private</a>
+    <a id="313" class="Keyword">module</a> <a id="Gen"></a><a id="320" href="lib.groups.FreeGroup.html#320" class="Module">Gen</a> <a id="324" class="Symbol">=</a> <a id="326" href="lib.groups.GeneratedGroup.html#369" class="Module">GeneratedGroup</a> <a id="341" href="lib.groups.FreeGroup.html#280" class="Bound">A</a> <a id="343" href="lib.Relation.html#170" class="Function">empty-rel</a>
+  <a id="355" class="Keyword">open</a> <a id="360" href="lib.groups.FreeGroup.html#320" class="Module">Gen</a> <a id="364" class="Keyword">hiding</a> <a id="371" class="Symbol">(</a><a id="372" href="lib.groups.GeneratedGroup.html#5926" class="Function">GenGroup</a><a id="380" class="Symbol">)</a> <a id="382" class="Keyword">public</a>
+
+  <a id="FreeGroup.FreeGroup"></a><a id="392" href="lib.groups.FreeGroup.html#392" class="Function">FreeGroup</a> <a id="402" class="Symbol">:</a> <a id="404" href="lib.types.Group.html#7567" class="Record">Group</a> <a id="410" href="lib.groups.FreeGroup.html#276" class="Bound">i</a>
+  <a id="414" href="lib.groups.FreeGroup.html#392" class="Function">FreeGroup</a> <a id="424" class="Symbol">=</a> <a id="426" href="lib.groups.GeneratedGroup.html#5926" class="Function">Gen.GenGroup</a>
+
+  <a id="442" class="Keyword">module</a> <a id="Freeness"></a><a id="449" href="lib.groups.FreeGroup.html#449" class="Module">Freeness</a> <a id="458" class="Symbol">{</a><a id="459" href="lib.groups.FreeGroup.html#459" class="Bound">j</a><a id="460" class="Symbol">}</a> <a id="462" class="Symbol">(</a><a id="463" href="lib.groups.FreeGroup.html#463" class="Bound">G</a> <a id="465" class="Symbol">:</a> <a id="467" href="lib.types.Group.html#7567" class="Record">Group</a> <a id="473" href="lib.groups.FreeGroup.html#459" class="Bound">j</a><a id="474" class="Symbol">)</a> <a id="476" class="Keyword">where</a>
+
+    <a id="487" class="Keyword">private</a>
+      <a id="501" class="Keyword">module</a> <a id="G"></a><a id="508" href="lib.groups.FreeGroup.html#508" class="Module">G</a> <a id="510" class="Symbol">=</a> <a id="512" href="lib.types.Group.html#7567" class="Module">Group</a> <a id="518" href="lib.groups.FreeGroup.html#463" class="Bound">G</a>
+      <a id="526" class="Keyword">module</a> <a id="HE"></a><a id="533" href="lib.groups.FreeGroup.html#533" class="Module">HE</a> <a id="536" class="Symbol">=</a> <a id="538" href="lib.groups.GeneratedGroup.html#6601" class="Module">HomomorphismEquiv</a> <a id="556" href="lib.groups.FreeGroup.html#463" class="Bound">G</a>
+
+    <a id="FreeGroup.Freeness.extend-equiv"></a><a id="563" href="lib.groups.FreeGroup.html#563" class="Function">extend-equiv</a> <a id="576" class="Symbol">:</a> <a id="578" class="Symbol">(</a><a id="579" href="lib.groups.FreeGroup.html#280" class="Bound">A</a> <a id="581" class="Symbol">→</a> <a id="583" href="lib.types.Group.html#7630" class="Field">G.El</a><a id="587" class="Symbol">)</a> <a id="589" href="lib.Equivalence.html#4492" class="Function Operator">≃</a> <a id="591" class="Symbol">(</a><a id="592" href="lib.groups.FreeGroup.html#392" class="Function">FreeGroup</a> <a id="602" href="lib.groups.Homomorphism.html#4084" class="Function Operator">→ᴳ</a> <a id="605" href="lib.groups.FreeGroup.html#463" class="Bound">G</a><a id="606" class="Symbol">)</a>
+    <a id="612" href="lib.groups.FreeGroup.html#563" class="Function">extend-equiv</a> <a id="625" class="Symbol">=</a>
+      <a id="633" href="lib.groups.GeneratedGroup.html#10511" class="Function">HE.extend-equiv</a> <a id="649" href="lib.Equivalence.html#6100" class="Function Operator">∘e</a> <a id="652" href="lib.types.Word.html#5435" class="Function">every-function-respects-empty-rel-equiv</a> <a id="692" href="lib.groups.FreeGroup.html#280" class="Bound">A</a> <a id="694" href="lib.groups.FreeGroup.html#463" class="Bound">G</a>
+
+    <a id="FreeGroup.Freeness.extend"></a><a id="701" href="lib.groups.FreeGroup.html#701" class="Function">extend</a> <a id="708" class="Symbol">:</a> <a id="710" class="Symbol">(</a><a id="711" href="lib.groups.FreeGroup.html#280" class="Bound">A</a> <a id="713" class="Symbol">→</a> <a id="715" href="lib.types.Group.html#7630" class="Field">G.El</a><a id="719" class="Symbol">)</a> <a id="721" class="Symbol">→</a> <a id="723" class="Symbol">(</a><a id="724" href="lib.groups.FreeGroup.html#392" class="Function">FreeGroup</a> <a id="734" href="lib.groups.Homomorphism.html#4084" class="Function Operator">→ᴳ</a> <a id="737" href="lib.groups.FreeGroup.html#463" class="Bound">G</a><a id="738" class="Symbol">)</a>
+    <a id="744" href="lib.groups.FreeGroup.html#701" class="Function">extend</a> <a id="751" class="Symbol">=</a> <a id="753" href="lib.Equivalence.html#4804" class="Function">–&gt;</a> <a id="756" href="lib.groups.FreeGroup.html#563" class="Function">extend-equiv</a>
+
+    <a id="FreeGroup.Freeness.extend-is-equiv"></a><a id="774" href="lib.groups.FreeGroup.html#774" class="Function">extend-is-equiv</a> <a id="790" class="Symbol">:</a> <a id="792" href="lib.Equivalence.html#1603" class="Record">is-equiv</a> <a id="801" href="lib.groups.FreeGroup.html#701" class="Function">extend</a>
+    <a id="812" href="lib.groups.FreeGroup.html#774" class="Function">extend-is-equiv</a> <a id="828" class="Symbol">=</a> <a id="830" href="lib.Base.html#5505" class="Field">snd</a> <a id="834" href="lib.groups.FreeGroup.html#563" class="Function">extend-equiv</a>
+</pre></body></html>

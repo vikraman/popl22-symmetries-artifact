@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>HoTT</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--rewriting</a> <a id="37" class="Symbol">#-}</a>
+
+<a id="42" class="Keyword">module</a> <a id="49" href="HoTT.html" class="Module">HoTT</a> <a id="54" class="Keyword">where</a>
+
+<a id="61" class="Keyword">open</a> <a id="66" class="Keyword">import</a> <a id="73" href="lib.Basics.html" class="Module">lib.Basics</a> <a id="84" class="Keyword">public</a>
+
+<a id="92" class="Keyword">open</a> <a id="97" class="Keyword">import</a> <a id="104" href="lib.Equivalence2.html" class="Module">lib.Equivalence2</a> <a id="121" class="Keyword">public</a>
+<a id="128" class="Keyword">open</a> <a id="133" class="Keyword">import</a> <a id="140" href="lib.NConnected.html" class="Module">lib.NConnected</a> <a id="155" class="Keyword">public</a>
+<a id="162" class="Keyword">open</a> <a id="167" class="Keyword">import</a> <a id="174" href="lib.NType2.html" class="Module">lib.NType2</a> <a id="185" class="Keyword">public</a>
+<a id="192" class="Keyword">open</a> <a id="197" class="Keyword">import</a> <a id="204" href="lib.Relation2.html" class="Module">lib.Relation2</a> <a id="218" class="Keyword">public</a>
+<a id="225" class="Keyword">open</a> <a id="230" class="Keyword">import</a> <a id="237" href="lib.Function2.html" class="Module">lib.Function2</a> <a id="251" class="Keyword">public</a>
+
+<a id="259" class="Keyword">open</a> <a id="264" class="Keyword">import</a> <a id="271" href="lib.cubical.Cubical.html" class="Module">lib.cubical.Cubical</a> <a id="291" class="Keyword">public</a>
+<a id="298" class="Keyword">open</a> <a id="303" class="Keyword">import</a> <a id="310" href="lib.types.Types.html" class="Module">lib.types.Types</a> <a id="326" class="Keyword">public</a>
+<a id="333" class="Keyword">open</a> <a id="338" class="Keyword">import</a> <a id="345" href="lib.groups.Groups.html" class="Module">lib.groups.Groups</a> <a id="363" class="Keyword">public</a>
+<a id="370" class="Keyword">open</a> <a id="375" class="Keyword">import</a> <a id="382" href="lib.groupoids.Groupoids.html" class="Module">lib.groupoids.Groupoids</a> <a id="406" class="Keyword">public</a>
+<a id="413" class="Keyword">open</a> <a id="418" class="Keyword">import</a> <a id="425" href="lib.modalities.Modalities.html" class="Module">lib.modalities.Modalities</a> <a id="451" class="Keyword">public</a>
+<a id="458" class="Keyword">open</a> <a id="463" class="Keyword">import</a> <a id="470" href="lib.two-semi-categories.TwoSemiCategories.html" class="Module">lib.two-semi-categories.TwoSemiCategories</a> <a id="512" class="Keyword">public</a>
+
+<a id="520" class="Comment">{-
+To use coinduction in the form of [∞], [♭] and [♯] you can do:
+
+open import HoTT
+open Coinduction
+
+You can also use coinductive records and copatterns instead, that’s prettier
+(see experimental/GlobularTypes.agda for an example)
+-}</a>
+<a id="755" class="Keyword">module</a> <a id="Coinduction"></a><a id="762" href="HoTT.html#762" class="Module">Coinduction</a> <a id="774" class="Keyword">where</a>
+  <a id="782" class="Keyword">open</a> <a id="787" class="Keyword">import</a> <a id="794" href="lib.Coinduction.html" class="Module">lib.Coinduction</a> <a id="810" class="Keyword">public</a>
+
+<a id="818" class="Comment">-- deprecated operators</a>
+<a id="842" class="Keyword">module</a> <a id="849" href="HoTT.html#849" class="Module">_</a> <a id="851" class="Keyword">where</a>
+  <a id="859" class="Keyword">infix</a> <a id="865" class="Number">15</a> <a id="868" href="HoTT.html#873" class="Function Operator">_∎</a>
+  <a id="873" href="HoTT.html#873" class="Function Operator">_∎</a> <a id="876" class="Symbol">=</a> <a id="878" href="lib.Base.html#7816" class="Function Operator">_=∎</a>
+  <a id="884" href="HoTT.html#884" class="Function">conn-elim</a> <a id="894" class="Symbol">=</a> <a id="896" href="lib.NConnected.html#2416" class="Function">conn-extend</a>
+  <a id="910" href="HoTT.html#910" class="Function">conn-elim-β</a> <a id="922" class="Symbol">=</a> <a id="924" href="lib.NConnected.html#2659" class="Function">conn-extend-β</a>
+  <a id="940" href="HoTT.html#940" class="Function">conn-elim-general</a> <a id="958" class="Symbol">=</a> <a id="960" href="lib.NConnected.html#3058" class="Function">conn-extend-general</a>
+  <a id="982" href="HoTT.html#982" class="Function">conn-intro</a> <a id="993" class="Symbol">=</a> <a id="995" href="lib.NConnected.html#4794" class="Function">conn-in</a>
+
+  <a id="1006" href="HoTT.html#1006" class="Function Operator">if_then_else_</a> <a id="1020" class="Symbol">:</a> <a id="1022" class="Symbol">∀</a> <a id="1024" class="Symbol">{</a><a id="1025" href="HoTT.html#1025" class="Bound">i</a><a id="1026" class="Symbol">}</a> <a id="1028" class="Symbol">{</a><a id="1029" href="HoTT.html#1029" class="Bound">A</a> <a id="1031" class="Symbol">:</a> <a id="1033" href="lib.Base.html#1144" class="Function">Type</a> <a id="1038" href="HoTT.html#1025" class="Bound">i</a><a id="1039" class="Symbol">}</a>
+    <a id="1045" class="Symbol">→</a> <a id="1047" href="lib.types.Bool.html#236" class="Function">Bool</a> <a id="1052" class="Symbol">→</a> <a id="1054" href="HoTT.html#1029" class="Bound">A</a> <a id="1056" class="Symbol">→</a> <a id="1058" href="HoTT.html#1029" class="Bound">A</a> <a id="1060" class="Symbol">→</a> <a id="1062" href="HoTT.html#1029" class="Bound">A</a>
+  <a id="1066" href="HoTT.html#1006" class="Function Operator">if</a> <a id="1069" href="lib.types.Bool.html#258" class="InductiveConstructor">true</a> <a id="1074" href="HoTT.html#1006" class="Function Operator">then</a> <a id="1079" href="HoTT.html#1079" class="Bound">t</a> <a id="1081" href="HoTT.html#1006" class="Function Operator">else</a> <a id="1086" href="HoTT.html#1086" class="Bound">e</a> <a id="1088" class="Symbol">=</a> <a id="1090" href="HoTT.html#1079" class="Bound">t</a>
+  <a id="1094" href="HoTT.html#1006" class="Function Operator">if</a> <a id="1097" href="lib.types.Bool.html#282" class="InductiveConstructor">false</a> <a id="1103" href="HoTT.html#1006" class="Function Operator">then</a> <a id="1108" href="HoTT.html#1108" class="Bound">t</a> <a id="1110" href="HoTT.html#1006" class="Function Operator">else</a> <a id="1115" href="HoTT.html#1115" class="Bound">e</a> <a id="1117" class="Symbol">=</a> <a id="1119" href="HoTT.html#1115" class="Bound">e</a>
+</pre></body></html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Pi.UFin.Base</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--exact-split</a> <a id="39" class="Pragma">--rewriting</a> <a id="51" class="Symbol">#-}</a>
+
+<a id="56" class="Keyword">module</a> <a id="63" href="Pi.UFin.Base.html" class="Module">Pi.UFin.Base</a> <a id="76" class="Keyword">where</a>
+
+<a id="83" class="Keyword">open</a> <a id="88" class="Keyword">import</a> <a id="95" href="HoTT.html" class="Module">HoTT</a>
+<a id="100" class="Keyword">open</a> <a id="105" class="Keyword">import</a> <a id="112" href="homotopy.FinSet.html" class="Module">homotopy.FinSet</a> <a id="128" class="Keyword">public</a>
+
+<a id="136" class="Keyword">open</a> <a id="141" class="Keyword">import</a> <a id="148" href="Pi.UFin.BAut.html" class="Module">Pi.UFin.BAut</a>
+
+<a id="UFin"></a><a id="162" href="Pi.UFin.Base.html#162" class="Function">UFin</a> <a id="167" class="Symbol">=</a> <a id="169" href="homotopy.FinSet.html#530" class="Function">FinSet</a>
+
+<a id="UFin[_]"></a><a id="177" href="Pi.UFin.Base.html#177" class="Function Operator">UFin[_]</a> <a id="185" class="Symbol">:</a> <a id="187" href="lib.Base.html#6333" class="Datatype">ℕ</a> <a id="189" class="Symbol">→</a> <a id="191" href="lib.Base.html#1235" class="Function">Type₁</a>
+<a id="197" href="Pi.UFin.Base.html#177" class="Function Operator">UFin[</a> <a id="203" href="Pi.UFin.Base.html#203" class="Bound">n</a> <a id="205" href="Pi.UFin.Base.html#177" class="Function Operator">]</a> <a id="207" class="Symbol">=</a> <a id="209" href="lib.types.BAut.html#311" class="Function">BAut</a> <a id="214" class="Symbol">(</a><a id="215" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="219" href="Pi.UFin.Base.html#203" class="Bound">n</a><a id="220" class="Symbol">)</a>
+
+<a id="pFin"></a><a id="223" href="Pi.UFin.Base.html#223" class="Function">pFin</a> <a id="228" class="Symbol">:</a> <a id="230" class="Symbol">(</a><a id="231" href="Pi.UFin.Base.html#231" class="Bound">n</a> <a id="233" class="Symbol">:</a> <a id="235" href="lib.Base.html#6333" class="Datatype">ℕ</a><a id="236" class="Symbol">)</a> <a id="238" class="Symbol">→</a> <a id="240" href="Pi.UFin.Base.html#177" class="Function Operator">UFin[</a> <a id="246" href="Pi.UFin.Base.html#231" class="Bound">n</a> <a id="248" href="Pi.UFin.Base.html#177" class="Function Operator">]</a>
+<a id="250" href="Pi.UFin.Base.html#223" class="Function">pFin</a> <a id="255" href="Pi.UFin.Base.html#255" class="Bound">n</a> <a id="257" class="Symbol">=</a> <a id="259" href="lib.Base.html#12131" class="Field">pt</a> <a id="262" class="Symbol">(</a><a id="263" href="lib.types.BAut.html#528" class="Function">pBAut</a> <a id="269" class="Symbol">(</a><a id="270" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="274" href="Pi.UFin.Base.html#255" class="Bound">n</a><a id="275" class="Symbol">))</a>
+
+<a id="279" class="Keyword">instance</a>
+  <a id="FinSet-exp-level"></a><a id="290" href="Pi.UFin.Base.html#290" class="Function">FinSet-exp-level</a> <a id="307" class="Symbol">:</a> <a id="309" href="lib.NType2.html#5119" class="Function">is-gpd</a> <a id="316" href="homotopy.FinSet.html#277" class="Function">FinSet-exp</a>
+  <a id="329" href="Pi.UFin.Base.html#290" class="Function">FinSet-exp-level</a> <a id="346" class="Symbol">=</a> <a id="348" href="lib.types.Sigma.html#4225" class="Function">Σ-level</a> <a id="356" class="Symbol">(</a><a id="357" href="lib.NType.html#2143" class="Function">raise-level</a> <a id="369" class="Number">0</a> <a id="371" href="lib.types.Nat.html#1699" class="Function">ℕ-level</a><a id="378" class="Symbol">)</a> <a id="380" class="Symbol">λ</a> <a id="382" href="Pi.UFin.Base.html#382" class="Bound">n</a> <a id="384" class="Symbol">→</a> <a id="386" href="Pi.UFin.BAut.html#937" class="Function">BAut-level</a> <a id="397" class="Symbol">{{</a><a id="399" href="lib.types.Fin.html#795" class="Function">Fin-is-set</a><a id="409" class="Symbol">}}</a>
+
+  <a id="FinSet-level"></a><a id="415" href="Pi.UFin.Base.html#415" class="Function">FinSet-level</a> <a id="428" class="Symbol">:</a> <a id="430" href="lib.NType2.html#5119" class="Function">is-gpd</a> <a id="437" href="homotopy.FinSet.html#530" class="Function">FinSet</a>
+  <a id="446" href="Pi.UFin.Base.html#415" class="Function">FinSet-level</a> <a id="459" class="Symbol">=</a> <a id="461" href="lib.Equivalence.html#11465" class="Function">equiv-preserves-level</a> <a id="483" href="homotopy.FinSet.html#2247" class="Function">FinSet-econv</a> <a id="496" class="Symbol">{{</a><a id="498" href="Pi.UFin.Base.html#290" class="Function">FinSet-exp-level</a><a id="514" class="Symbol">}}</a>
+</pre></body></html>

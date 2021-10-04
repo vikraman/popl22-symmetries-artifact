@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>lib.groupoids.FundamentalPreGroupoid</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--rewriting</a> <a id="37" class="Symbol">#-}</a>
+
+<a id="42" class="Keyword">open</a> <a id="47" class="Keyword">import</a> <a id="54" href="lib.Basics.html" class="Module">lib.Basics</a>
+<a id="65" class="Keyword">open</a> <a id="70" class="Keyword">import</a> <a id="77" href="lib.types.Truncation.html" class="Module">lib.types.Truncation</a>
+<a id="98" class="Keyword">open</a> <a id="103" class="Keyword">import</a> <a id="110" href="lib.types.Groupoid.html" class="Module">lib.types.Groupoid</a>
+<a id="129" class="Keyword">open</a> <a id="134" class="Keyword">import</a> <a id="141" href="lib.types.PathSet.html" class="Module">lib.types.PathSet</a>
+
+<a id="160" class="Keyword">module</a> <a id="167" href="lib.groupoids.FundamentalPreGroupoid.html" class="Module">lib.groupoids.FundamentalPreGroupoid</a> <a id="204" class="Symbol">{</a><a id="205" href="lib.groupoids.FundamentalPreGroupoid.html#205" class="Bound">i</a><a id="206" class="Symbol">}</a> <a id="208" class="Symbol">(</a><a id="209" href="lib.groupoids.FundamentalPreGroupoid.html#209" class="Bound">A</a> <a id="211" class="Symbol">:</a> <a id="213" href="lib.Base.html#1144" class="Function">Type</a> <a id="218" href="lib.groupoids.FundamentalPreGroupoid.html#205" class="Bound">i</a><a id="219" class="Symbol">)</a> <a id="221" class="Keyword">where</a>
+
+  <a id="fundamental-pregroupoid"></a><a id="230" href="lib.groupoids.FundamentalPreGroupoid.html#230" class="Function">fundamental-pregroupoid</a> <a id="254" class="Symbol">:</a> <a id="256" href="lib.types.Groupoid.html#1754" class="Record">PreGroupoid</a> <a id="268" href="lib.groupoids.FundamentalPreGroupoid.html#205" class="Bound">i</a> <a id="270" href="lib.groupoids.FundamentalPreGroupoid.html#205" class="Bound">i</a>
+  <a id="274" href="lib.groupoids.FundamentalPreGroupoid.html#230" class="Function">fundamental-pregroupoid</a> <a id="298" class="Symbol">=</a> <a id="300" class="Keyword">record</a>
+    <a id="311" class="Symbol">{</a> <a id="313" href="lib.types.Groupoid.html#1837" class="Field">El</a> <a id="316" class="Symbol">=</a> <a id="318" href="lib.groupoids.FundamentalPreGroupoid.html#209" class="Bound">A</a>
+    <a id="324" class="Symbol">;</a> <a id="326" href="lib.types.Groupoid.html#1853" class="Field">Arr</a> <a id="330" class="Symbol">=</a> <a id="332" href="lib.types.PathSet.html#260" class="Function Operator">_=₀_</a> <a id="337" class="Symbol">{</a><a id="338" class="Argument">A</a> <a id="340" class="Symbol">=</a> <a id="342" href="lib.groupoids.FundamentalPreGroupoid.html#209" class="Bound">A</a><a id="343" class="Symbol">}</a>
+    <a id="349" class="Symbol">;</a> <a id="351" href="lib.types.Groupoid.html#1880" class="Field">Arr-level</a> <a id="361" class="Symbol">=</a> <a id="363" class="Symbol">λ</a> <a id="365" href="lib.groupoids.FundamentalPreGroupoid.html#365" class="Bound">_</a> <a id="367" href="lib.groupoids.FundamentalPreGroupoid.html#367" class="Bound">_</a> <a id="369" class="Symbol">→</a> <a id="371" href="lib.types.Truncation.html#376" class="Postulate">Trunc-level</a>
+    <a id="387" class="Symbol">;</a> <a id="389" href="lib.types.Groupoid.html#1926" class="Field">groupoid-struct</a> <a id="405" class="Symbol">=</a> <a id="407" class="Keyword">record</a>
+      <a id="420" class="Symbol">{</a> <a id="422" href="lib.types.Groupoid.html#348" class="Field">ident</a> <a id="428" class="Symbol">=</a> <a id="430" href="lib.types.PathSet.html#669" class="Function">idp₀</a>
+      <a id="441" class="Symbol">;</a> <a id="443" href="lib.types.Groupoid.html#376" class="Field">inv</a> <a id="447" class="Symbol">=</a> <a id="449" href="lib.types.PathSet.html#598" class="Function">!₀</a>
+      <a id="458" class="Symbol">;</a> <a id="460" href="lib.types.Groupoid.html#414" class="Field">comp</a> <a id="465" class="Symbol">=</a> <a id="467" href="lib.types.PathSet.html#417" class="Function Operator">_∙₀_</a>
+      <a id="478" class="Symbol">;</a> <a id="480" href="lib.types.Groupoid.html#465" class="Field">unit-l</a> <a id="487" class="Symbol">=</a> <a id="489" href="lib.types.PathSet.html#1574" class="Function">∙₀-unit-l</a>
+      <a id="505" class="Symbol">;</a> <a id="507" href="lib.types.Groupoid.html#520" class="Field">assoc</a> <a id="513" class="Symbol">=</a> <a id="515" href="lib.types.PathSet.html#1915" class="Function">∙₀-assoc</a>
+      <a id="530" class="Symbol">;</a> <a id="532" href="lib.types.Groupoid.html#641" class="Field">inv-l</a> <a id="538" class="Symbol">=</a> <a id="540" href="lib.types.PathSet.html#2376" class="Function">!₀-inv-l</a>
+      <a id="555" class="Symbol">}</a>
+    <a id="561" class="Symbol">}</a>
+</pre></body></html>

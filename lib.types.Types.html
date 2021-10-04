@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>lib.types.Types</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--rewriting</a> <a id="37" class="Symbol">#-}</a>
+
+<a id="42" class="Keyword">module</a> <a id="49" href="lib.types.Types.html" class="Module">lib.types.Types</a> <a id="65" class="Keyword">where</a>
+
+<a id="72" class="Keyword">open</a> <a id="77" class="Keyword">import</a> <a id="84" href="lib.Basics.html" class="Module">lib.Basics</a>
+<a id="95" class="Keyword">open</a> <a id="100" class="Keyword">import</a> <a id="107" href="lib.types.BAut.html" class="Module">lib.types.BAut</a> <a id="122" class="Keyword">public</a>
+<a id="129" class="Keyword">open</a> <a id="134" class="Keyword">import</a> <a id="141" href="lib.types.BigWedge.html" class="Module">lib.types.BigWedge</a> <a id="160" class="Keyword">public</a>
+<a id="167" class="Keyword">open</a> <a id="172" class="Keyword">import</a> <a id="179" href="lib.types.Bool.html" class="Module">lib.types.Bool</a> <a id="194" class="Keyword">public</a>
+<a id="201" class="Keyword">open</a> <a id="206" class="Keyword">import</a> <a id="213" href="lib.types.Choice.html" class="Module">lib.types.Choice</a> <a id="230" class="Keyword">public</a>
+<a id="237" class="Keyword">open</a> <a id="242" class="Keyword">import</a> <a id="249" href="lib.types.Circle.html" class="Module">lib.types.Circle</a> <a id="266" class="Keyword">public</a>
+<a id="273" class="Keyword">open</a> <a id="278" class="Keyword">import</a> <a id="285" href="lib.types.Cofiber.html" class="Module">lib.types.Cofiber</a> <a id="303" class="Keyword">public</a>
+<a id="310" class="Keyword">open</a> <a id="315" class="Keyword">import</a> <a id="322" href="lib.types.CommutingSquare.html" class="Module">lib.types.CommutingSquare</a> <a id="348" class="Keyword">public</a>
+<a id="355" class="Keyword">open</a> <a id="360" class="Keyword">import</a> <a id="367" href="lib.types.Coproduct.html" class="Module">lib.types.Coproduct</a> <a id="387" class="Keyword">public</a>
+<a id="394" class="Keyword">open</a> <a id="399" class="Keyword">import</a> <a id="406" href="lib.types.Cospan.html" class="Module">lib.types.Cospan</a> <a id="423" class="Keyword">public</a>
+<a id="430" class="Keyword">open</a> <a id="435" class="Keyword">import</a> <a id="442" href="lib.types.Cover.html" class="Module">lib.types.Cover</a> <a id="458" class="Keyword">public</a>
+<a id="465" class="Keyword">open</a> <a id="470" class="Keyword">import</a> <a id="477" href="lib.types.CRing.html" class="Module">lib.types.CRing</a> <a id="493" class="Keyword">public</a>
+<a id="500" class="Keyword">open</a> <a id="505" class="Keyword">import</a> <a id="512" href="lib.types.EilenbergMacLane1.html" class="Module">lib.types.EilenbergMacLane1</a> <a id="540" class="Keyword">public</a>
+<a id="547" class="Keyword">open</a> <a id="552" class="Keyword">import</a> <a id="559" href="lib.types.Empty.html" class="Module">lib.types.Empty</a> <a id="575" class="Keyword">public</a>
+<a id="582" class="Keyword">open</a> <a id="587" class="Keyword">import</a> <a id="594" href="lib.types.Fin.html" class="Module">lib.types.Fin</a> <a id="608" class="Keyword">public</a>
+<a id="615" class="Keyword">open</a> <a id="620" class="Keyword">import</a> <a id="627" href="lib.types.NatColim.html" class="Module">lib.types.NatColim</a> <a id="646" class="Keyword">public</a>
+<a id="653" class="Keyword">open</a> <a id="658" class="Keyword">import</a> <a id="665" href="lib.types.Group.html" class="Module">lib.types.Group</a> <a id="681" class="Keyword">public</a>
+<a id="688" class="Keyword">open</a> <a id="693" class="Keyword">import</a> <a id="700" href="lib.types.GroupSet.html" class="Module">lib.types.GroupSet</a> <a id="719" class="Keyword">public</a>
+<a id="726" class="Keyword">open</a> <a id="731" class="Keyword">import</a> <a id="738" href="lib.types.Groupoid.html" class="Module">lib.types.Groupoid</a> <a id="757" class="Keyword">public</a>
+<a id="764" class="Keyword">open</a> <a id="769" class="Keyword">import</a> <a id="776" href="lib.types.HList.html" class="Module">lib.types.HList</a> <a id="792" class="Keyword">public</a>
+<a id="799" class="Keyword">open</a> <a id="804" class="Keyword">import</a> <a id="811" href="lib.types.Int.html" class="Module">lib.types.Int</a> <a id="825" class="Keyword">public</a>
+<a id="832" class="Keyword">open</a> <a id="837" class="Keyword">import</a> <a id="844" href="lib.types.IteratedSuspension.html" class="Module">lib.types.IteratedSuspension</a> <a id="873" class="Keyword">public</a>
+<a id="880" class="Keyword">open</a> <a id="885" class="Keyword">import</a> <a id="892" href="lib.types.Join.html" class="Module">lib.types.Join</a> <a id="907" class="Keyword">public</a>
+<a id="914" class="Keyword">open</a> <a id="919" class="Keyword">import</a> <a id="926" href="lib.types.Lift.html" class="Module">lib.types.Lift</a> <a id="941" class="Keyword">public</a>
+<a id="948" class="Keyword">open</a> <a id="953" class="Keyword">import</a> <a id="960" href="lib.types.List.html" class="Module">lib.types.List</a> <a id="975" class="Keyword">public</a>
+<a id="982" class="Keyword">open</a> <a id="987" class="Keyword">import</a> <a id="994" href="lib.types.LoopSpace.html" class="Module">lib.types.LoopSpace</a> <a id="1014" class="Keyword">public</a>
+<a id="1021" class="Keyword">open</a> <a id="1026" class="Keyword">import</a> <a id="1033" href="lib.types.Modality.html" class="Module">lib.types.Modality</a> <a id="1052" class="Keyword">public</a>
+<a id="1059" class="Keyword">open</a> <a id="1064" class="Keyword">import</a> <a id="1071" href="lib.types.Nat.html" class="Module">lib.types.Nat</a> <a id="1085" class="Keyword">public</a>
+<a id="1092" class="Keyword">open</a> <a id="1097" class="Keyword">import</a> <a id="1104" href="lib.types.PathSet.html" class="Module">lib.types.PathSet</a> <a id="1122" class="Keyword">public</a>
+<a id="1129" class="Keyword">open</a> <a id="1134" class="Keyword">import</a> <a id="1141" href="lib.types.Paths.html" class="Module">lib.types.Paths</a> <a id="1157" class="Keyword">public</a>
+<a id="1164" class="Keyword">open</a> <a id="1169" class="Keyword">import</a> <a id="1176" href="lib.types.Pi.html" class="Module">lib.types.Pi</a> <a id="1189" class="Keyword">public</a>
+<a id="1196" class="Keyword">open</a> <a id="1201" class="Keyword">import</a> <a id="1208" href="lib.types.Pointed.html" class="Module">lib.types.Pointed</a> <a id="1226" class="Keyword">public</a>
+<a id="1233" class="Keyword">open</a> <a id="1238" class="Keyword">import</a> <a id="1245" href="lib.types.Pullback.html" class="Module">lib.types.Pullback</a> <a id="1264" class="Keyword">public</a>
+<a id="1271" class="Keyword">open</a> <a id="1276" class="Keyword">import</a> <a id="1283" href="lib.types.Pushout.html" class="Module">lib.types.Pushout</a> <a id="1301" class="Keyword">public</a>
+<a id="1308" class="Keyword">open</a> <a id="1313" class="Keyword">import</a> <a id="1320" href="lib.types.PushoutFlattening.html" class="Module">lib.types.PushoutFlattening</a> <a id="1348" class="Keyword">public</a>
+<a id="1355" class="Keyword">open</a> <a id="1360" class="Keyword">import</a> <a id="1367" href="lib.types.PushoutFlip.html" class="Module">lib.types.PushoutFlip</a> <a id="1389" class="Keyword">public</a>
+<a id="1396" class="Keyword">open</a> <a id="1401" class="Keyword">import</a> <a id="1408" href="lib.types.PushoutFmap.html" class="Module">lib.types.PushoutFmap</a> <a id="1430" class="Keyword">public</a>
+<a id="1437" class="Keyword">open</a> <a id="1442" class="Keyword">import</a> <a id="1449" href="lib.types.SetQuotient.html" class="Module">lib.types.SetQuotient</a> <a id="1471" class="Keyword">public</a>
+<a id="1478" class="Keyword">open</a> <a id="1483" class="Keyword">import</a> <a id="1490" href="lib.types.Sigma.html" class="Module">lib.types.Sigma</a> <a id="1506" class="Keyword">public</a>
+<a id="1513" class="Keyword">open</a> <a id="1518" class="Keyword">import</a> <a id="1525" href="lib.types.Smash.html" class="Module">lib.types.Smash</a> <a id="1541" class="Keyword">public</a>
+<a id="1548" class="Keyword">open</a> <a id="1553" class="Keyword">import</a> <a id="1560" href="lib.types.Span.html" class="Module">lib.types.Span</a> <a id="1575" class="Keyword">public</a>
+<a id="1582" class="Keyword">open</a> <a id="1587" class="Keyword">import</a> <a id="1594" href="lib.types.Subtype.html" class="Module">lib.types.Subtype</a> <a id="1612" class="Keyword">public</a>
+<a id="1619" class="Keyword">open</a> <a id="1624" class="Keyword">import</a> <a id="1631" href="lib.types.Suspension.html" class="Module">lib.types.Suspension</a> <a id="1652" class="Keyword">public</a>
+<a id="1659" class="Keyword">open</a> <a id="1664" class="Keyword">import</a> <a id="1671" href="lib.types.TLevel.html" class="Module">lib.types.TLevel</a> <a id="1688" class="Keyword">public</a>
+<a id="1695" class="Keyword">open</a> <a id="1700" class="Keyword">import</a> <a id="1707" href="lib.types.Torus.html" class="Module">lib.types.Torus</a> <a id="1723" class="Keyword">public</a>
+<a id="1730" class="Keyword">open</a> <a id="1735" class="Keyword">import</a> <a id="1742" href="lib.types.Truncation.html" class="Module">lib.types.Truncation</a> <a id="1763" class="Keyword">public</a>
+<a id="1770" class="Keyword">open</a> <a id="1775" class="Keyword">import</a> <a id="1782" href="lib.types.TwoSemiCategory.html" class="Module">lib.types.TwoSemiCategory</a> <a id="1808" class="Keyword">public</a>
+<a id="1815" class="Keyword">open</a> <a id="1820" class="Keyword">import</a> <a id="1827" href="lib.types.Unit.html" class="Module">lib.types.Unit</a> <a id="1842" class="Keyword">public</a>
+<a id="1849" class="Keyword">open</a> <a id="1854" class="Keyword">import</a> <a id="1861" href="lib.types.Wedge.html" class="Module">lib.types.Wedge</a> <a id="1877" class="Keyword">public</a>
+<a id="1884" class="Keyword">open</a> <a id="1889" class="Keyword">import</a> <a id="1896" href="lib.types.Word.html" class="Module">lib.types.Word</a> <a id="1911" class="Keyword">public</a>
+
+<a id="1919" class="Comment">-- This should probably not be exported</a>
+<a id="1959" class="Comment">-- module Generic1HIT {i j} (A : Type i) (B : Type j) (f g : B → A) where</a>
+<a id="2033" class="Comment">--   open import lib.types.Generic1HIT A B f g public</a>
+</pre></body></html>

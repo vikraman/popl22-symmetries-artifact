@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Pi.Examples.Reset</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--exact-split</a> <a id="39" class="Pragma">--rewriting</a> <a id="51" class="Pragma">--overlapping-instances</a> <a id="75" class="Symbol">#-}</a>
+
+<a id="80" class="Keyword">open</a> <a id="85" class="Keyword">import</a> <a id="92" href="HoTT.html" class="Module">HoTT</a> <a id="97" class="Keyword">hiding</a> <a id="104" class="Symbol">(</a><a id="105" href="lib.types.Nat.html#1866" class="Datatype Operator">_&lt;_</a> <a id="109" class="Symbol">;</a> <a id="111" href="lib.types.Nat.html#1894" class="InductiveConstructor">ltS</a> <a id="115" class="Symbol">;</a> <a id="117" href="lib.types.Nat.html#1922" class="InductiveConstructor">ltSR</a> <a id="122" class="Symbol">;</a> <a id="124" href="lib.types.Nat.html#291" class="Primitive Operator">_+_</a> <a id="128" class="Symbol">;</a> <a id="130" href="lib.types.Sigma.html#250" class="Function Operator">_×_</a><a id="133" class="Symbol">)</a>
+<a id="135" class="Keyword">import</a> <a id="142" href="lib.types.Nat.html" class="Module">lib.types.Nat</a> <a id="156" class="Symbol">as</a> <a id="159" class="Module">N</a>
+<a id="161" class="Keyword">import</a> <a id="168" href="lib.types.Sigma.html" class="Module">lib.types.Sigma</a> <a id="184" class="Symbol">as</a> <a id="187" class="Module">S</a>
+
+<a id="190" class="Keyword">open</a> <a id="195" class="Keyword">import</a> <a id="202" href="Pi.UFin.BAut.html" class="Module">Pi.UFin.BAut</a>
+<a id="215" class="Keyword">open</a> <a id="220" class="Keyword">import</a> <a id="227" href="Pi.Common.Misc.html" class="Module">Pi.Common.Misc</a>
+<a id="242" class="Keyword">open</a> <a id="247" class="Keyword">import</a> <a id="254" href="Pi.Common.Extra.html" class="Module">Pi.Common.Extra</a>
+
+<a id="271" class="Keyword">open</a> <a id="276" class="Keyword">import</a> <a id="283" href="Pi.Syntax.Pi%252B.Indexed.html" class="Module">Pi.Syntax.Pi+.Indexed</a> <a id="305" class="Symbol">as</a> <a id="308" class="Module">Pi+</a>
+<a id="312" class="Keyword">open</a> <a id="317" class="Keyword">import</a> <a id="324" href="Pi.Syntax.Pi%255E.html" class="Module">Pi.Syntax.Pi^</a> <a id="338" class="Symbol">as</a> <a id="341" class="Module">Pi^</a>
+<a id="345" class="Keyword">open</a> <a id="350" class="Keyword">import</a> <a id="357" href="Pi.Syntax.Pi%255EHelpers.html" class="Module">Pi.Syntax.Pi^Helpers</a> <a id="378" class="Symbol">as</a> <a id="381" class="Module">Pi^</a>
+<a id="385" class="Keyword">open</a> <a id="390" class="Keyword">import</a> <a id="397" href="Pi.Syntax.Pi.html" class="Module">Pi.Syntax.Pi</a> <a id="410" class="Symbol">as</a> <a id="413" class="Module">Pi</a>
+<a id="416" class="Keyword">open</a> <a id="421" class="Keyword">import</a> <a id="428" href="Pi.Equiv.Translation2.html" class="Module">Pi.Equiv.Translation2</a>
+<a id="450" class="Keyword">import</a> <a id="457" href="Pi.Equiv.Equiv1.html" class="Module">Pi.Equiv.Equiv1</a> <a id="473" class="Symbol">as</a> <a id="476" class="Module">Pi+</a>
+<a id="480" class="Keyword">import</a> <a id="487" href="Pi.Equiv.Equiv0Hat.html" class="Module">Pi.Equiv.Equiv0Hat</a> <a id="506" class="Symbol">as</a> <a id="509" class="Module">Pi^</a>
+<a id="513" class="Keyword">import</a> <a id="520" href="Pi.Equiv.Equiv1Hat.html" class="Module">Pi.Equiv.Equiv1Hat</a> <a id="539" class="Symbol">as</a> <a id="542" class="Module">Pi^</a>
+<a id="546" class="Keyword">import</a> <a id="553" href="Pi.Equiv.Equiv0Norm.html" class="Module">Pi.Equiv.Equiv0Norm</a> <a id="573" class="Symbol">as</a> <a id="576" class="Module">Pi^</a>
+<a id="580" class="Keyword">import</a> <a id="587" href="Pi.Equiv.Equiv1Norm.html" class="Module">Pi.Equiv.Equiv1Norm</a> <a id="607" class="Symbol">as</a> <a id="610" class="Module">Pi^</a>
+<a id="614" class="Keyword">open</a> <a id="619" class="Keyword">import</a> <a id="626" href="Pi.UFin.UFin.html" class="Module">Pi.UFin.UFin</a>
+<a id="639" class="Keyword">open</a> <a id="644" class="Keyword">import</a> <a id="651" href="Pi.UFin.Monoidal.html" class="Module">Pi.UFin.Monoidal</a>
+<a id="668" class="Keyword">open</a> <a id="673" class="Keyword">import</a> <a id="680" href="Pi.Common.FinHelpers.html" class="Module">Pi.Common.FinHelpers</a>
+<a id="701" class="Keyword">open</a> <a id="706" class="Keyword">import</a> <a id="713" href="Pi.Lehmer.FinExcept.html" class="Module">Pi.Lehmer.FinExcept</a>
+
+<a id="734" class="Keyword">module</a> <a id="741" href="Pi.Examples.Reset.html" class="Module">Pi.Examples.Reset</a> <a id="759" class="Keyword">where</a>
+
+<a id="766" class="Keyword">open</a> <a id="771" class="Keyword">import</a> <a id="778" href="Pi.Examples.Base.html" class="Module">Pi.Examples.Base</a>
+<a id="795" class="Keyword">open</a> <a id="800" class="Keyword">import</a> <a id="807" href="Pi.Examples.Toffoli.html" class="Module">Pi.Examples.Toffoli</a>
+
+<a id="rearrange"></a><a id="828" href="Pi.Examples.Reset.html#828" class="Function">rearrange</a> <a id="838" class="Symbol">:</a> <a id="840" class="Symbol">(</a><a id="841" href="Pi.Examples.Reset.html#841" class="Bound">t₁</a> <a id="844" href="Pi.Examples.Reset.html#844" class="Bound">t₂</a> <a id="847" href="Pi.Examples.Reset.html#847" class="Bound">t₃</a> <a id="850" class="Symbol">:</a> <a id="852" href="Pi.Syntax.Pi.html#247" class="Datatype">Pi.U</a><a id="856" class="Symbol">)</a> <a id="858" class="Symbol">→</a> <a id="860" href="Pi.Examples.Reset.html#841" class="Bound">t₁</a> <a id="863" href="Pi.Syntax.Pi.html#299" class="InductiveConstructor Operator">Pi.×</a> <a id="868" class="Symbol">(</a><a id="869" href="Pi.Examples.Reset.html#844" class="Bound">t₂</a> <a id="872" href="Pi.Syntax.Pi.html#299" class="InductiveConstructor Operator">Pi.×</a> <a id="877" href="Pi.Examples.Reset.html#847" class="Bound">t₃</a><a id="879" class="Symbol">)</a> <a id="881" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="887" href="Pi.Examples.Reset.html#844" class="Bound">t₂</a> <a id="890" href="Pi.Syntax.Pi.html#299" class="InductiveConstructor Operator">Pi.×</a> <a id="895" class="Symbol">(</a><a id="896" href="Pi.Examples.Reset.html#841" class="Bound">t₁</a> <a id="899" href="Pi.Syntax.Pi.html#299" class="InductiveConstructor Operator">Pi.×</a> <a id="904" href="Pi.Examples.Reset.html#847" class="Bound">t₃</a><a id="906" class="Symbol">)</a>
+<a id="908" href="Pi.Examples.Reset.html#828" class="Function">rearrange</a> <a id="918" href="Pi.Examples.Reset.html#918" class="Bound">t₁</a> <a id="921" href="Pi.Examples.Reset.html#921" class="Bound">t₂</a> <a id="924" href="Pi.Examples.Reset.html#924" class="Bound">t₃</a> <a id="927" class="Symbol">=</a> <a id="929" href="Pi.Syntax.Pi.html#720" class="InductiveConstructor">assocl⋆</a> <a id="937" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="939" class="Symbol">(</a><a id="940" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a> <a id="946" href="Pi.Syntax.Pi.html#1281" class="InductiveConstructor Operator">⊗</a> <a id="948" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a><a id="952" class="Symbol">)</a> <a id="954" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="956" href="Pi.Syntax.Pi.html#766" class="InductiveConstructor">assocr⋆</a>
+
+<a id="reset"></a><a id="965" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="971" class="Symbol">:</a> <a id="973" class="Symbol">∀</a> <a id="975" href="Pi.Examples.Reset.html#975" class="Bound">n</a> <a id="977" class="Symbol">→</a> <a id="979" href="Pi.Examples.Base.html#2155" class="Function">𝟚</a> <a id="981" href="Pi.Syntax.Pi.html#299" class="InductiveConstructor Operator">Pi.×</a> <a id="986" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="988" href="Pi.Examples.Reset.html#975" class="Bound">n</a> <a id="990" href="Pi.Syntax.Pi.html#438" class="Datatype Operator">Pi.⟷₁</a> <a id="996" href="Pi.Examples.Base.html#2155" class="Function">𝟚</a> <a id="998" href="Pi.Syntax.Pi.html#299" class="InductiveConstructor Operator">Pi.×</a> <a id="1003" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="1005" href="Pi.Examples.Reset.html#975" class="Bound">n</a>
+<a id="1007" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="1013" href="lib.Base.html#6351" class="InductiveConstructor">O</a> <a id="1015" class="Symbol">=</a> <a id="1017" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a>
+<a id="1022" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="1028" class="Symbol">(</a><a id="1029" href="lib.Base.html#6359" class="InductiveConstructor">S</a> <a id="1031" href="lib.Base.html#6351" class="InductiveConstructor">O</a><a id="1032" class="Symbol">)</a> <a id="1034" class="Symbol">=</a> <a id="1036" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a> <a id="1042" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="1044" href="Pi.Examples.Toffoli.html#1736" class="Function">cnot</a> <a id="1049" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="1051" href="Pi.Syntax.Pi.html#596" class="InductiveConstructor">swap⋆</a>
+<a id="1057" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="1063" class="Symbol">(</a><a id="1064" href="lib.Base.html#6359" class="InductiveConstructor">S</a> <a id="1066" class="Symbol">(</a><a id="1067" href="lib.Base.html#6359" class="InductiveConstructor">S</a> <a id="1069" href="Pi.Examples.Reset.html#1069" class="Bound">n</a><a id="1070" class="Symbol">))</a> <a id="1073" class="Symbol">=</a> <a id="1075" href="Pi.Examples.Reset.html#828" class="Function">rearrange</a> <a id="1085" href="Pi.Examples.Base.html#2155" class="Function">𝟚</a> <a id="1087" href="Pi.Examples.Base.html#2155" class="Function">𝟚</a> <a id="1089" class="Symbol">(</a><a id="1090" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="1092" class="Symbol">(</a><a id="1093" href="lib.Base.html#6359" class="InductiveConstructor">S</a> <a id="1095" href="Pi.Examples.Reset.html#1069" class="Bound">n</a><a id="1096" class="Symbol">))</a> <a id="1099" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="1101" href="Pi.Examples.Toffoli.html#1352" class="Function">cif</a> <a id="1105" class="Symbol">(</a><a id="1106" href="Pi.Examples.Toffoli.html#1552" class="Function">not</a> <a id="1110" href="Pi.Syntax.Pi.html#1281" class="InductiveConstructor Operator">⊗</a> <a id="1112" href="Pi.Syntax.Pi.html#1149" class="InductiveConstructor">id⟷₁</a><a id="1116" class="Symbol">)</a> <a id="1118" class="Symbol">(</a><a id="1119" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="1125" class="Symbol">(</a><a id="1126" href="lib.Base.html#6359" class="InductiveConstructor">S</a> <a id="1128" href="Pi.Examples.Reset.html#1069" class="Bound">n</a><a id="1129" class="Symbol">))</a> <a id="1132" href="Pi.Syntax.Pi.html#1167" class="InductiveConstructor Operator">◎</a> <a id="1134" href="Pi.Examples.Reset.html#828" class="Function">rearrange</a> <a id="1144" href="Pi.Examples.Base.html#2155" class="Function">𝟚</a> <a id="1146" href="Pi.Examples.Base.html#2155" class="Function">𝟚</a> <a id="1148" class="Symbol">(</a><a id="1149" href="Pi.Examples.Base.html#2265" class="Function">𝔹</a> <a id="1151" class="Symbol">(</a><a id="1152" href="lib.Base.html#6359" class="InductiveConstructor">S</a> <a id="1154" href="Pi.Examples.Reset.html#1069" class="Bound">n</a><a id="1155" class="Symbol">))</a>
+
+<a id="reset^"></a><a id="1159" href="Pi.Examples.Reset.html#1159" class="Function">reset^</a> <a id="1166" class="Symbol">:</a> <a id="1168" class="Symbol">∀</a> <a id="1170" href="Pi.Examples.Reset.html#1170" class="Bound">n</a> <a id="1172" class="Symbol">→</a> <a id="1174" class="Symbol">_</a>
+<a id="1176" href="Pi.Examples.Reset.html#1159" class="Function">reset^</a> <a id="1183" class="Symbol">=</a> <a id="1185" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="1191" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="1193" href="Pi.Examples.Reset.html#965" class="Function">reset</a>
+
+<a id="reset+"></a><a id="1200" href="Pi.Examples.Reset.html#1200" class="Function">reset+</a> <a id="1207" class="Symbol">:</a> <a id="1209" class="Symbol">∀</a> <a id="1211" href="Pi.Examples.Reset.html#1211" class="Bound">n</a> <a id="1213" class="Symbol">→</a> <a id="1215" class="Symbol">_</a>
+<a id="1217" href="Pi.Examples.Reset.html#1200" class="Function">reset+</a> <a id="1224" class="Symbol">=</a> <a id="1226" href="Pi.Equiv.Equiv1Hat.html#663" class="Function">Pi^.quote^₁</a> <a id="1238" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="1240" href="Pi.Equiv.Equiv1Norm.html#1926" class="Function">Pi^.quoteNorm₁</a> <a id="1255" href="lib.Base.html#2004" class="InductiveConstructor">idp</a> <a id="1259" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="1261" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="1275" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="1277" href="Pi.Examples.Reset.html#1159" class="Function">reset^</a>
+
+<a id="reset+test"></a><a id="1285" href="Pi.Examples.Reset.html#1285" class="Function">reset+test</a> <a id="1296" class="Symbol">:</a> <a id="1298" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1302" class="Number">8</a> <a id="1304" class="Symbol">→</a> <a id="1306" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1310" class="Number">8</a>
+<a id="1312" href="Pi.Examples.Reset.html#1285" class="Function">reset+test</a> <a id="1323" class="Symbol">=</a> <a id="1325" href="lib.Equivalence.html#4804" class="Function">–&gt;</a> <a id="1328" class="Symbol">(</a><a id="1329" href="Pi.Equiv.Equiv1.html#957" class="Function">Pi+.eval₁</a> <a id="1339" class="Symbol">(</a><a id="1340" href="Pi.Examples.Reset.html#1200" class="Function">reset+</a> <a id="1347" class="Number">2</a><a id="1348" class="Symbol">))</a>
+
+<a id="reset-test"></a><a id="1352" href="Pi.Examples.Reset.html#1352" class="Function">reset-test</a> <a id="1363" class="Symbol">:</a> <a id="1365" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1369" class="Number">8</a> <a id="1371" class="Symbol">→</a> <a id="1373" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1377" class="Number">8</a>
+<a id="1379" href="Pi.Examples.Reset.html#1352" class="Function">reset-test</a> <a id="1390" class="Symbol">=</a> <a id="1392" href="lib.Equivalence.html#4804" class="Function">–&gt;</a> <a id="1395" class="Symbol">(</a><a id="1396" href="Pi.Equiv.Equiv1Norm.html#1554" class="Function">Pi^.evalNorm₁</a> <a id="1410" class="Symbol">(</a><a id="1411" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="1417" class="Symbol">(</a><a id="1418" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="1424" class="Number">2</a><a id="1425" class="Symbol">)))</a>
+
+<a id="reset2-perm"></a><a id="1430" href="Pi.Examples.Reset.html#1430" class="Function">reset2-perm</a> <a id="1442" class="Symbol">:</a> <a id="1444" href="Pi.UFin.BAut.html#1234" class="Function">Aut</a> <a id="1448" class="Symbol">(</a><a id="1449" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1453" class="Number">8</a><a id="1454" class="Symbol">)</a>
+<a id="1456" href="Pi.Examples.Reset.html#1430" class="Function">reset2-perm</a> <a id="1468" class="Symbol">=</a> <a id="1470" href="lib.Equivalence.html#4643" class="Function">equiv</a> <a id="1476" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1478" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1480" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1484" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a>
+  <a id="1490" class="Keyword">where</a> <a id="1496" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1498" class="Symbol">:</a> <a id="1500" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1504" class="Number">8</a> <a id="1506" class="Symbol">→</a> <a id="1508" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1512" class="Number">8</a>
+        <a id="1522" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1524" class="Symbol">(</a><a id="1525" href="lib.Base.html#6351" class="InductiveConstructor">O</a> <a id="1527" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1529" href="Pi.Examples.Reset.html#1529" class="Bound">ϕ</a><a id="1530" class="Symbol">)</a> <a id="1532" class="Symbol">=</a> <a id="1534" class="Number">0</a>
+        <a id="1544" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1546" class="Symbol">(</a><a id="1547" class="Number">1</a> <a id="1549" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1551" href="Pi.Examples.Reset.html#1551" class="Bound">ϕ</a><a id="1552" class="Symbol">)</a> <a id="1554" class="Symbol">=</a> <a id="1556" class="Number">5</a>
+        <a id="1566" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1568" class="Symbol">(</a><a id="1569" class="Number">2</a> <a id="1571" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1573" href="Pi.Examples.Reset.html#1573" class="Bound">ϕ</a><a id="1574" class="Symbol">)</a> <a id="1576" class="Symbol">=</a> <a id="1578" class="Number">6</a>
+        <a id="1588" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1590" class="Symbol">(</a><a id="1591" class="Number">3</a> <a id="1593" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1595" href="Pi.Examples.Reset.html#1595" class="Bound">ϕ</a><a id="1596" class="Symbol">)</a> <a id="1598" class="Symbol">=</a> <a id="1600" class="Number">7</a>
+        <a id="1610" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1612" class="Symbol">(</a><a id="1613" class="Number">4</a> <a id="1615" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1617" href="Pi.Examples.Reset.html#1617" class="Bound">ϕ</a><a id="1618" class="Symbol">)</a> <a id="1620" class="Symbol">=</a> <a id="1622" class="Number">4</a>
+        <a id="1632" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1634" class="Symbol">(</a><a id="1635" class="Number">5</a> <a id="1637" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1639" href="Pi.Examples.Reset.html#1639" class="Bound">ϕ</a><a id="1640" class="Symbol">)</a> <a id="1642" class="Symbol">=</a> <a id="1644" class="Number">1</a>
+        <a id="1654" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1656" class="Symbol">(</a><a id="1657" class="Number">6</a> <a id="1659" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1661" href="Pi.Examples.Reset.html#1661" class="Bound">ϕ</a><a id="1662" class="Symbol">)</a> <a id="1664" class="Symbol">=</a> <a id="1666" class="Number">2</a>
+        <a id="1676" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1678" class="Symbol">(</a><a id="1679" class="Number">7</a> <a id="1681" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1683" href="Pi.Examples.Reset.html#1683" class="Bound">ϕ</a><a id="1684" class="Symbol">)</a> <a id="1686" class="Symbol">=</a> <a id="1688" class="Number">3</a>
+        <a id="1698" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1700" class="Symbol">(</a><a id="1701" href="Pi.Examples.Reset.html#1701" class="Bound">n</a> <a id="1703" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1705" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1712" class="Symbol">(</a><a id="1713" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1720" class="Symbol">(</a><a id="1721" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1728" class="Symbol">(</a><a id="1729" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1736" class="Symbol">(</a><a id="1737" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1744" class="Symbol">(</a><a id="1745" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1752" class="Symbol">(</a><a id="1753" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1760" class="Symbol">(</a><a id="1761" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="1768" class="Symbol">()))))))))</a>
+        <a id="1787" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1791" class="Symbol">:</a> <a id="1793" class="Symbol">(</a><a id="1794" href="Pi.Examples.Reset.html#1794" class="Bound">x</a> <a id="1796" class="Symbol">:</a> <a id="1798" href="lib.types.Fin.html#173" class="Function">Fin</a> <a id="1802" class="Number">8</a><a id="1803" class="Symbol">)</a> <a id="1805" class="Symbol">→</a> <a id="1807" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1809" class="Symbol">(</a><a id="1810" href="Pi.Examples.Reset.html#1496" class="Function">f</a> <a id="1812" href="Pi.Examples.Reset.html#1794" class="Bound">x</a><a id="1813" class="Symbol">)</a> <a id="1815" href="lib.Base.html#1953" class="Datatype Operator">==</a> <a id="1818" href="Pi.Examples.Reset.html#1794" class="Bound">x</a>
+        <a id="1828" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1832" class="Symbol">(</a><a id="1833" href="lib.Base.html#6351" class="InductiveConstructor">O</a> <a id="1835" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1837" href="Pi.Examples.Reset.html#1837" class="Bound">ϕ</a><a id="1838" class="Symbol">)</a> <a id="1840" class="Symbol">=</a> <a id="1842" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="1847" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="1859" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1863" class="Symbol">(</a><a id="1864" class="Number">1</a> <a id="1866" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1868" href="Pi.Examples.Reset.html#1868" class="Bound">ϕ</a><a id="1869" class="Symbol">)</a> <a id="1871" class="Symbol">=</a> <a id="1873" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="1878" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="1890" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1894" class="Symbol">(</a><a id="1895" class="Number">2</a> <a id="1897" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1899" href="Pi.Examples.Reset.html#1899" class="Bound">ϕ</a><a id="1900" class="Symbol">)</a> <a id="1902" class="Symbol">=</a> <a id="1904" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="1909" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="1921" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1925" class="Symbol">(</a><a id="1926" class="Number">3</a> <a id="1928" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1930" href="Pi.Examples.Reset.html#1930" class="Bound">ϕ</a><a id="1931" class="Symbol">)</a> <a id="1933" class="Symbol">=</a> <a id="1935" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="1940" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="1952" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1956" class="Symbol">(</a><a id="1957" class="Number">4</a> <a id="1959" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1961" href="Pi.Examples.Reset.html#1961" class="Bound">ϕ</a><a id="1962" class="Symbol">)</a> <a id="1964" class="Symbol">=</a> <a id="1966" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="1971" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="1983" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="1987" class="Symbol">(</a><a id="1988" class="Number">5</a> <a id="1990" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="1992" href="Pi.Examples.Reset.html#1992" class="Bound">ϕ</a><a id="1993" class="Symbol">)</a> <a id="1995" class="Symbol">=</a> <a id="1997" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="2002" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="2014" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="2018" class="Symbol">(</a><a id="2019" class="Number">6</a> <a id="2021" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="2023" href="Pi.Examples.Reset.html#2023" class="Bound">ϕ</a><a id="2024" class="Symbol">)</a> <a id="2026" class="Symbol">=</a> <a id="2028" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="2033" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="2045" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="2049" class="Symbol">(</a><a id="2050" class="Number">7</a> <a id="2052" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="2054" href="Pi.Examples.Reset.html#2054" class="Bound">ϕ</a><a id="2055" class="Symbol">)</a> <a id="2057" class="Symbol">=</a> <a id="2059" href="Pi.Common.Misc.html#5670" class="Function">fin=</a> <a id="2064" href="lib.Base.html#2004" class="InductiveConstructor">idp</a>
+        <a id="2076" href="Pi.Examples.Reset.html#1787" class="Function">f-f</a> <a id="2080" class="Symbol">(</a><a id="2081" href="Pi.Examples.Reset.html#2081" class="Bound">n</a> <a id="2083" href="lib.Base.html#5477" class="InductiveConstructor Operator">,</a> <a id="2085" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2092" class="Symbol">(</a><a id="2093" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2100" class="Symbol">(</a><a id="2101" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2108" class="Symbol">(</a><a id="2109" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2116" class="Symbol">(</a><a id="2117" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2124" class="Symbol">(</a><a id="2125" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2132" class="Symbol">(</a><a id="2133" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2140" class="Symbol">(</a><a id="2141" href="lib.types.Nat.html#1922" class="InductiveConstructor">N.ltSR</a> <a id="2148" class="Symbol">()))))))))</a>
+
+<a id="reset2-perm+"></a><a id="2160" href="Pi.Examples.Reset.html#2160" class="Function">reset2-perm+</a> <a id="2173" class="Symbol">:</a> <a id="2175" class="Symbol">_</a>
+<a id="2177" href="Pi.Examples.Reset.html#2160" class="Function">reset2-perm+</a> <a id="2190" class="Symbol">=</a> <a id="2192" class="Symbol">(</a><a id="2193" href="Pi.Equiv.Equiv1Hat.html#663" class="Function">Pi^.quote^₁</a> <a id="2205" href="lib.Base.html#10836" class="Function Operator">∘</a> <a id="2207" href="Pi.Equiv.Equiv1Norm.html#1926" class="Function">Pi^.quoteNorm₁</a> <a id="2222" href="lib.Base.html#2004" class="InductiveConstructor">idp</a><a id="2225" class="Symbol">)</a> <a id="2227" href="Pi.Examples.Reset.html#1430" class="Function">reset2-perm</a>
+
+<a id="2240" class="Comment">-- ((true , true , true) , false , true , true) ::</a>
+<a id="2291" class="Comment">-- ((true , true , false) , false , true , false) ::</a>
+<a id="2344" class="Comment">-- ((true , false , true) , false , false , true) ::</a>
+<a id="2397" class="Comment">-- ((true , false , false) , true , false , false) ::</a>
+<a id="2451" class="Comment">-- ((false , true , true) , true , true , true) ::</a>
+<a id="2502" class="Comment">-- ((false , true , false) , true , true , false) ::</a>
+<a id="2555" class="Comment">-- ((false , false , true) , true , false , true) ::</a>
+<a id="2608" class="Comment">-- ((false , false , false) , false , false , false) :: nil</a>
+
+<a id="2669" class="Comment">-- 0 b1 b2 b3 =&gt; or(b1,b2,b3) , b1 b2 b3</a>
+<a id="2710" class="Comment">-- 1 b1 b2 b3 =&gt; nor(b1,b2,b3) , b1 b2 b3</a>
+
+<a id="2753" class="Comment">-- {-</a>
+
+<a id="2760" class="Comment">-- 0000 -&gt; 0000 -&gt; 0 -&gt; 0</a>
+<a id="2786" class="Comment">-- 0001 -&gt; 1001 -&gt; 1 -&gt; 9</a>
+<a id="2812" class="Comment">-- 0010 -&gt; 1010 -&gt; 2 -&gt; 10</a>
+<a id="2839" class="Comment">-- 0011 -&gt; 1011 -&gt; 3 -&gt; 11</a>
+<a id="2866" class="Comment">-- 0100 -&gt; 1100 -&gt; 4 -&gt; 12</a>
+<a id="2893" class="Comment">-- 0101 -&gt; 1101 -&gt; 5 -&gt; 13</a>
+<a id="2920" class="Comment">-- 0110 -&gt; 1110 -&gt; 6 -&gt; 14</a>
+<a id="2947" class="Comment">-- 0111 -&gt; 1111 -&gt; 7 -&gt; 15</a>
+<a id="2974" class="Comment">-- 1000 -&gt; 1000 -&gt; 8 -&gt; 8</a>
+<a id="3000" class="Comment">-- 1001 -&gt; 0001 -&gt; 9 -&gt; 1</a>
+<a id="3026" class="Comment">-- 1010 -&gt; 0010 -&gt; 10 -&gt; 2</a>
+<a id="3053" class="Comment">-- 1011 -&gt; 0011 -&gt; 11 -&gt; 3</a>
+<a id="3080" class="Comment">-- 1100 -&gt; 0100 -&gt; 12 -&gt; 4</a>
+<a id="3107" class="Comment">-- 1101 -&gt; 0101 -&gt; 13 -&gt; 5</a>
+<a id="3134" class="Comment">-- 1110 -&gt; 0110 -&gt; 14 -&gt; 6</a>
+<a id="3161" class="Comment">-- 1111 -&gt; 0111 -&gt; 15 -&gt; 7</a>
+
+<a id="3189" class="Comment">-- -}</a>
+
+<a id="3196" class="Comment">-- _ : (reset+test 0 == 0) S.×</a>
+<a id="3227" class="Comment">--     (reset+test 1 == 1) S.×</a>
+<a id="3258" class="Comment">--     (reset+test 2 == 2) S.×</a>
+<a id="3289" class="Comment">--     (reset+test 3 == 3) S.×</a>
+<a id="3320" class="Comment">--     (reset+test 4 == 4) S.×</a>
+<a id="3351" class="Comment">--     (reset+test 5 == 5) S.×</a>
+<a id="3382" class="Comment">--     (reset+test 6 == 6) S.×</a>
+<a id="3413" class="Comment">--     (reset+test 7 == 7)</a>
+
+<a id="3441" class="Comment">-- _ = fin= idp ,</a>
+<a id="3459" class="Comment">--     fin= idp ,</a>
+<a id="3477" class="Comment">--     fin= idp ,</a>
+<a id="3495" class="Comment">--     fin= idp ,</a>
+<a id="3513" class="Comment">--     fin= idp ,</a>
+<a id="3531" class="Comment">--     fin= idp ,</a>
+<a id="3549" class="Comment">--     fin= idp ,</a>
+<a id="3567" class="Comment">--     fin= idp</a>
+
+<a id="3584" class="Comment">{-
+
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕
+ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊)
+◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+id⟷₁
+
+-}</a>
+
+<a id="3807" class="Keyword">open</a> <a id="3812" class="Keyword">import</a> <a id="3819" href="Pi.Examples.Interp.html" class="Module">Pi.Examples.Interp</a>
+
+<a id="test-interp-reset2"></a><a id="3839" href="Pi.Examples.Reset.html#3839" class="Function">test-interp-reset2</a> <a id="3858" class="Symbol">=</a> <a id="3860" href="Pi.Examples.Interp.html#2998" class="Function">interp-elems</a> <a id="3873" class="Symbol">(</a><a id="3874" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="3880" class="Number">2</a><a id="3881" class="Symbol">)</a>
+
+<a id="3884" class="Comment">{-
+((true , true , true) , false , true , true) ::
+((true , true , false) , false , true , false) ::
+((true , false , true) , false , false , true) ::
+((true , false , false) , true , false , false) ::
+((false , true , true) , true , true , true) ::
+((false , true , false) , true , true , false) ::
+((false , false , true) , true , false , true) ::
+((false , false , false) , false , false , false) :: nil
+-}</a>
+
+<a id="test-interp-reset2x+"></a><a id="4295" href="Pi.Examples.Reset.html#4295" class="Function">test-interp-reset2x+</a> <a id="4316" class="Symbol">=</a> <a id="4318" href="Pi.Examples.Interp.html#3141" class="Function">interp+-elems</a> <a id="4332" class="Symbol">(</a><a id="4333" href="Pi.Equiv.Equiv1Hat.html#663" class="Function">Pi^.quote^₁</a> <a id="4345" class="Symbol">(</a><a id="4346" href="Pi.Equiv.Translation2.html#5027" class="Function">eval₁</a> <a id="4352" class="Symbol">(</a><a id="4353" href="Pi.Examples.Reset.html#965" class="Function">reset</a> <a id="4359" class="Number">2</a><a id="4360" class="Symbol">)))</a>
+<a id="test-encode-interp-reset2"></a><a id="4364" href="Pi.Examples.Reset.html#4364" class="Function">test-encode-interp-reset2</a> <a id="4390" class="Symbol">=</a> <a id="4392" href="lib.types.List.html#4639" class="Function">map</a> <a id="4396" href="Pi.Examples.Interp.html#3461" class="Function">encode-interp-elems</a> <a id="4416" href="Pi.Examples.Reset.html#3839" class="Function">test-interp-reset2</a>
+
+<a id="4436" class="Comment">-- (true , inr (inr (inr (inr true)))) ::</a>
+<a id="4478" class="Comment">-- (inr true , inr (inr (inr (inr (inr true))))) ::</a>
+<a id="4530" class="Comment">-- (inr (inr true) , inr (inr (inr (inr (inr (inr true)))))) ::</a>
+<a id="4594" class="Comment">-- (inr (inr (inr true)) , inr (inr (inr true))) ::</a>
+<a id="4646" class="Comment">-- (inr (inr (inr (inr true))) , true) ::</a>
+<a id="4688" class="Comment">-- (inr (inr (inr (inr (inr true)))) , inr true) ::</a>
+<a id="4740" class="Comment">-- (inr (inr (inr (inr (inr (inr true))))) , inr (inr true)) ::</a>
+<a id="4804" class="Comment">-- (inr (inr (inr (inr (inr (inr (inr true)))))) ,</a>
+<a id="4855" class="Comment">--  inr (inr (inr (inr (inr (inr (inr true)))))))</a>
+<a id="4905" class="Comment">-- :: nil</a>
+
+<a id="4916" class="Comment">-- (true , true) ::</a>
+<a id="4936" class="Comment">-- (inr true , inr true) ::</a>
+<a id="4964" class="Comment">-- (inr (inr true) , inr (inr true)) ::</a>
+<a id="5004" class="Comment">-- (inr (inr (inr true)) , inr (inr (inr true))) ::</a>
+<a id="5056" class="Comment">-- (inr (inr (inr (inr true))) ,</a>
+<a id="5089" class="Comment">--  inr (inr (inr (inr (inr (inr true))))))</a>
+<a id="5133" class="Comment">-- ::</a>
+<a id="5139" class="Comment">-- (inr (inr (inr (inr (inr true)))) ,</a>
+<a id="5178" class="Comment">--  inr (inr (inr (inr (inr true)))))</a>
+<a id="5216" class="Comment">-- ::</a>
+<a id="5222" class="Comment">-- (inr (inr (inr (inr (inr (inr true))))) ,</a>
+<a id="5267" class="Comment">--  inr (inr (inr (inr true))))</a>
+<a id="5299" class="Comment">-- ::</a>
+<a id="5305" class="Comment">-- (inr (inr (inr (inr (inr (inr (inr true)))))) ,</a>
+<a id="5356" class="Comment">--  inr (inr (inr (inr (inr (inr (inr true)))))))</a>
+<a id="5406" class="Comment">-- :: nil</a>
+
+<a id="test-interp-reset2+"></a><a id="5417" href="Pi.Examples.Reset.html#5417" class="Function">test-interp-reset2+</a> <a id="5437" class="Symbol">=</a> <a id="5439" href="Pi.Examples.Interp.html#3141" class="Function">interp+-elems</a> <a id="5453" class="Symbol">(</a><a id="5454" href="Pi.Examples.Reset.html#1200" class="Function">reset+</a> <a id="5461" class="Number">2</a><a id="5462" class="Symbol">)</a>
+
+<a id="5465" class="Comment">-- (true , true) ::</a>
+<a id="5485" class="Comment">-- (inr true , inr true) ::</a>
+<a id="5513" class="Comment">-- (inr (inr true) , inr (inr true)) ::</a>
+<a id="5553" class="Comment">-- (inr (inr (inr true)) , inr (inr (inr true))) ::</a>
+<a id="5605" class="Comment">-- (inr (inr (inr (inr true))) ,</a>
+<a id="5638" class="Comment">--  inr (inr (inr (inr (inr (inr true))))))</a>
+<a id="5682" class="Comment">-- ::</a>
+<a id="5688" class="Comment">-- (inr (inr (inr (inr (inr true)))) ,</a>
+<a id="5727" class="Comment">--  inr (inr (inr (inr (inr true)))))</a>
+<a id="5765" class="Comment">-- ::</a>
+<a id="5771" class="Comment">-- (inr (inr (inr (inr (inr (inr true))))) ,</a>
+<a id="5816" class="Comment">--  inr (inr (inr (inr true))))</a>
+<a id="5848" class="Comment">-- ::</a>
+<a id="5854" class="Comment">-- (inr (inr (inr (inr (inr (inr (inr true)))))) ,</a>
+<a id="5905" class="Comment">--  inr (inr (inr (inr (inr (inr (inr true)))))))</a>
+<a id="5955" class="Comment">-- :: nil</a>
+
+<a id="test-interp-reset^2"></a><a id="5966" href="Pi.Examples.Reset.html#5966" class="Function">test-interp-reset^2</a> <a id="5986" class="Symbol">=</a> <a id="5988" href="Pi.Examples.Interp.html#3319" class="Function">interp^-elems</a> <a id="6002" class="Symbol">(</a><a id="6003" href="Pi.Examples.Reset.html#1159" class="Function">reset^</a> <a id="6010" class="Number">2</a><a id="6011" class="Symbol">)</a>
+
+<a id="6014" class="Comment">-- (true , true) ::</a>
+<a id="6034" class="Comment">-- (inr true , inr true) ::</a>
+<a id="6062" class="Comment">-- (inr (inr true) , inr (inr true)) ::</a>
+<a id="6102" class="Comment">-- (inr (inr (inr true)) , inr (inr (inr true))) ::</a>
+<a id="6154" class="Comment">-- (inr (inr (inr (inr true))) ,</a>
+<a id="6187" class="Comment">--  inr (inr (inr (inr (inr (inr true))))))</a>
+<a id="6231" class="Comment">-- ::</a>
+<a id="6237" class="Comment">-- (inr (inr (inr (inr (inr true)))) ,</a>
+<a id="6276" class="Comment">--  inr (inr (inr (inr (inr true)))))</a>
+<a id="6314" class="Comment">-- ::</a>
+<a id="6320" class="Comment">-- (inr (inr (inr (inr (inr (inr true))))) ,</a>
+<a id="6365" class="Comment">--  inr (inr (inr (inr true))))</a>
+<a id="6397" class="Comment">-- ::</a>
+<a id="6403" class="Comment">-- (inr (inr (inr (inr (inr (inr (inr true)))))) ,</a>
+<a id="6454" class="Comment">--  inr (inr (inr (inr (inr (inr (inr true)))))))</a>
+<a id="6504" class="Comment">-- :: nil</a>
+
+<a id="6515" class="Keyword">open</a> <a id="6520" class="Keyword">import</a> <a id="6527" href="Pi.Equiv.Equiv1NormHelpers.html" class="Module">Pi.Equiv.Equiv1NormHelpers</a>
+<a id="6554" class="Keyword">open</a> <a id="6559" class="Keyword">import</a> <a id="6566" href="Pi.Coxeter.LehmerCoxeterEquiv.html" class="Module">Pi.Coxeter.LehmerCoxeterEquiv</a>
+<a id="6596" class="Keyword">open</a> <a id="6601" class="Keyword">import</a> <a id="6608" href="Pi.Lehmer.LehmerFinEquiv.html" class="Module">Pi.Lehmer.LehmerFinEquiv</a>
+<a id="reset^-list"></a><a id="6633" href="Pi.Examples.Reset.html#6633" class="Function">reset^-list</a> <a id="6645" class="Symbol">=</a> <a id="6647" href="Pi.Equiv.Equiv1NormHelpers.html#4030" class="Function">pi^2list</a> <a id="6656" class="Symbol">(</a><a id="6657" href="Pi.Examples.Reset.html#1159" class="Function">reset^</a> <a id="6664" class="Number">2</a><a id="6665" class="Symbol">)</a>
+<a id="reset^-list+"></a><a id="6667" href="Pi.Examples.Reset.html#6667" class="Function">reset^-list+</a> <a id="6680" class="Symbol">=</a> <a id="6682" href="Pi.Coxeter.LehmerCoxeterEquiv.html#995" class="Function">immersion</a> <a id="6692" class="Symbol">(</a><a id="6693" href="lib.Equivalence.html#4804" class="Function">–&gt;</a> <a id="6696" href="Pi.Lehmer.LehmerFinEquiv.html#2277" class="Function">Fin≃Lehmer</a> <a id="6707" href="Pi.Examples.Reset.html#1430" class="Function">reset2-perm</a><a id="6718" class="Symbol">)</a>
+
+<a id="6721" class="Comment">{-
+reset+ 2:
+
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕
+ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊)
+◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎
+(id⟷₁ ⊕ id⟷₁ ⊕ assocl₊ ◎ (swap₊ ⊕ id⟷₁) ◎ assocr₊) ◎ id⟷₁
+
+-}</a>
+</pre></body></html>
