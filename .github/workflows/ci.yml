@@ -44,7 +44,9 @@ jobs:
 
       - name: Generate html
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        run: make html
+        run: |
+          ./index.sh
+          make html
 
       - name: Deploy html
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

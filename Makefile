@@ -7,8 +7,8 @@ reallyall: $(AGDA_BINS)
 %.agdai: %.agda
 	agda $<
 
-html: $(AGDA_SRCS)
-	agda --html Pi/Everything.agda
+html: index.agda $(AGDA_SRCS)
+	agda --html index.agda
 
 todos: $(AGDA_SRCS)
 	find -H Pi -type f -name '*.agda' -exec grep -n --colour=auto 'TODO\!' {} \+

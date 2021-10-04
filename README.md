@@ -1,5 +1,6 @@
 # Artifact for "Symmetries in Reversible Programming"
 
+[![bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/37991)
 [![ci](https://github.com/vikraman/popl22-symmetries-artifact/actions/workflows/ci.yml/badge.svg)](https://github.com/vikraman/popl22-symmetries-artifact)
 [![docker](https://github.com/vikraman/popl22-symmetries-artifact/actions/workflows/docker.yml/badge.svg)](https://hub.docker.com/r/vikraman/popl22-symmetries-artifact)
 [![docker pulls](https://img.shields.io/docker/pulls/vikraman/popl22-symmetries-artifact.svg)](https://hub.docker.com/r/vikraman/popl22-symmetries-artifact)
@@ -8,14 +9,17 @@ This repository contains the accompanying formalisation for the POPL'22 paper "S
 From Symmetric Rig Groupoids to Reversible Programming Languages".
 
 The purpose of this artifact is to:
+
  - Provide a partial formalisation of the semantics presented in the paper and related results.
+
  - Show applications of the semantics, using a collection of examples showing normalisation-by-evaluation, synthesis,
    and equivalence of reversible circuits.
 
 ## Installation
 
-The formalisation has been checked using [Agda 2.6.1.3](https://hackage.haskell.org/package/Agda-2.6.1.3) and [HoTT-Agda
-(Andrew Swan's fork)](https://github.com/awswan/HoTT-Agda/tree/agda-2.6.1-compatible).
+The formalisation has been checked using [Agda 2.6.1.3](https://hackage.haskell.org/package/Agda-2.6.1.3) and the
+[HoTT-Agda](https://github.com/HoTT/HoTT-Agda) library [(using Andrew Swan's
+fork)](https://github.com/awswan/HoTT-Agda/tree/agda-2.6.1-compatible).
 
 ### Option 1: Native installation
 
@@ -23,38 +27,56 @@ The easiest way to install Agda on your machine is using stack.
 
 - Install stack following the instructions on the official website: https://docs.haskellstack.org/
 
-- Install Agda using stack.
+- Install Agda using stack (tested using [ghc 8.10.4 and resolver 17.15](.github/workflows/ci.yml)).
 
 ```sh
 $ stack install Agda-2.6.1.3
 ```
 
-To step through the proofs and examples interactively, one has to use the interactive Agda mode, which is available for
-Emacs and VSCode. To use it:
- - In Emacs, simply use `agda-mode locate` and load the file to get the major mode for Agda. Use `C-c C-l` to load the
-   Agda file, and `C-u C-c C-n` to compute the normal form of a term.
- - In VSCode, install `agda-mode` extension and point it to the location of Agda executable in your system. The usage
-   instructions are provided in the extension's documentation. To load the file, use `C-c C-l`. After loading the file,
-   inspect the normal form of a chosen expression by using `C-u C-n`.
+Then, clone this repository and use the provided Makefile.
+
+```sh
+$ git clone --recursive https://github.com/vikraman/popl22-symmetries-artifact
+$ cd popl22-symmetries-artifact
+```
 
 To count the number of lines, we use [cloc](https://github.com/AlDanial/cloc) which can be installed [using a package
 manager](https://github.com/AlDanial/cloc#install-via-package-manager).
 
-### Option 2: Using docker image
+### Option 2: Using our docker image
 
-```
+We also provide a prebuilt docker image with all tools and libraries installed.
+
+```sh
 $ docker pull vikraman/popl22-symmetries-artifact
+$ docker run -it --rm vikraman/popl22-symmetries-artifact bash
 ```
 
 ## Evaluation
 
-We provide a Makefile whose default target is to check all files using agda.
+We provide a [Makefile](Makefile) whose default target checks the [Pi/Everything.agda](Pi/Everthing.agda) file.
 
 ```sh
 $ make
 ```
 
+Or, it can also exhaustively check every file in the Pi directory.
+
+```sh
+$ make reallyall
+```
+
 Alternatively, you can check individual files in agda, or load up the emacs mode to interactively examine a file.
+
+To step through the proofs and examples interactively, one has to use the interactive Agda mode, which is available for
+Emacs and VSCode. To use it:
+
+ - In Emacs, simply use `agda-mode locate` and load the file to get the major mode for Agda. Use `C-c C-l` to load the
+   Agda file, and `C-u C-c C-n` to compute the normal form of a term.
+
+ - In VSCode, install `agda-mode` extension and point it to the location of Agda executable in your system. The usage
+   instructions are provided in the extension's documentation. To load the file, use `C-c C-l`. After loading the file,
+   inspect the normal form of a chosen expression by using `C-u C-n`.
 
 To count the number of lines, run:
 
@@ -70,20 +92,20 @@ $ make todos
 
 ## Documentation
 
-This directory contains the formalisation of the denotational semantics of Pi, accompanying the paper. `Everything.agda`
-is the main entrypoint to the project.
+This repository contains the formalisation of the denotational semantics of Pi, accompanying the paper.
+`Pi/Everything.agda` is the main entrypoint to the project.
 
 ### Structure
 
-  - `Common`: Common lemmas and definitions about natural numbers and lists, used in the project.
-  - `Coxeter`: Definition and properties of the Coxeter relation and the rewriting system based on it.
-  - `Equiv`: The main proof of equivalence between Pi and UFin.
-  - `Examples`: Examples of reversible boolean circuits showing applications of the semantics.
-  - `Experiments`: Various experiments, alternative approaches and earlier results.
-  - `FSMG`: Free symmetric monoidal groupoids.
-  - `Lehmer`: Lehmer codes.
-  - `Syntax`: Syntax of Pi and its variants.
-  - `UFin`: Construction of UFin and various properties.
+  - `Pi.Common`: Common lemmas and definitions about natural numbers and lists, used in the project.
+  - `Pi.Coxeter`: Definition and properties of the Coxeter relation and the rewriting system based on it.
+  - `Pi.Equiv`: The main proof of equivalence between Pi and UFin.
+  - `Pi.Examples`: Examples of reversible boolean circuits showing applications of the semantics.
+  - `Pi.Experiments`: Various experiments, alternative approaches and earlier results.
+  - `Pi.FSMG`: Free symmetric monoidal groupoids.
+  - `Pi.Lehmer`: Lehmer codes.
+  - `Pi.Syntax`: Syntax of Pi and its variants.
+  - `Pi.UFin`: Construction of UFin and various properties.
 
 ### List of Claims
 
@@ -197,17 +219,17 @@ $U_{fin}$. Instead of following the list of claims in the text, we state what ea
 
 #### Section 7
 
-The formalisation includes several examples, including those mentioned in the paper, and several others.
+The formalisation includes several examples, including those mentioned in the paper, and others.
 
 The files are more-or-less self-documented -- we define each reversible circuit, compute their normal forms, then quote
 them back, step-by-step using the semantics. One can inspect each term using Agda's interactive mode, using the "Compute
-Normal Form" command.
+Normal Form" command. Note that computing normal forms for some circuits can be _really slow_.
 
  - [Pi/Examples/Adder.agda](Pi/Examples/Adder.agda): Reversible 3-bit/4-bit adder.
  - [Pi/Examples/Base.agda](Pi/Examples/Base.agda): Helpers and tests.
  - [Pi/Examples/Copy.agda](Pi/Examples/Copy.agda): Reversible copy.
  - [Pi/Examples/ExamplesL.lagda](Pi/Examples/ExamplesL.lagda): Examples used in the paper text, `reversibleOrNorm`
-   function  is implemented as `adder3` in [Pi/Examples/Adder.agda](Pi/Examples/Adder.agda).
+   function is implemented as `adder3` in [Pi/Examples/Adder.agda](Pi/Examples/Adder.agda).
  - [Pi/Examples/ExpMod.agda](Pi/Examples/ExpMod.agda): Reversible exponentiation modulo 2^n.
  - [Pi/Examples/Incr.agda](Pi/Examples/Incr.agda): Reversible increment.
  - [Pi/Examples/Interp.agda](Pi/Examples/Interp.agda): Interpreters for 1-combinators of Pi, Pi+, Pi^, and various tests.

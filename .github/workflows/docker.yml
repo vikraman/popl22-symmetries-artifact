@@ -1,4 +1,7 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'main'
 name: docker
 
 jobs:
@@ -31,26 +34,12 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ${{ github.repository }}:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
-
-      - name: Build only
-        id: docker_build_push
-        if: ${{ github.event_name != 'push' || github.ref != 'refs/heads/main' }}
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          file: ./Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: false
           tags:  ${{ github.repository }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
