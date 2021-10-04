@@ -29,6 +29,14 @@ The easiest way to install Agda on your machine is using stack.
 $ stack install Agda-2.6.1.3
 ```
 
+To step through the proofs and examples interactively, one has to use the interactive Agda mode, which is available for
+Emacs and VSCode. To use it:
+ - In Emacs, simply use `agda-mode locate` and load the file to get the major mode for Agda. Use `C-c C-l` to load the
+   Agda file, and `C-u C-c C-n` to compute the normal form of a term.
+ - In VSCode, install `agda-mode` extension and point it to the location of Agda executable in your system. The usage
+   instructions are provided in the extension's documentation. To load the file, use `C-c C-l`. After loading the file,
+   inspect the normal form of a chosen expression by using `C-u C-n`.
+
 To count the number of lines, we use [cloc](https://github.com/AlDanial/cloc) which can be installed [using a package
 manager](https://github.com/AlDanial/cloc#install-via-package-manager).
 
@@ -186,6 +194,10 @@ $U_{fin}$. Instead of following the list of claims in the text, we state what ea
 #### Section 7
 
 The formalisation includes several examples, including those mentioned in the paper, and several others.
+
+The files are more-or-less self-documented -- we define each reversible circuit, compute their normal forms, then quote
+them back, step-by-step using the semantics. One can inspect each term using Agda's interactive mode, using the "Compute
+Normal Form" command.
 
  - [Pi/Examples/Adder.agda](Pi/Examples/Adder.agda): Reversible 3-bit/4-bit adder.
  - [Pi/Examples/Base.agda](Pi/Examples/Base.agda): Helpers and tests.
