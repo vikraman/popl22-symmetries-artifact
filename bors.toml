@@ -1,2 +1,3 @@
-status = [ "agda" ]
+status = [ "agda", "docker" ]
 delete_merged_branches = true
+timeout_sec = 7200

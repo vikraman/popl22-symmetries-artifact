@@ -1,9 +1,10 @@
-# FROM        ubuntu:20.04
-# MAINTAINER  Jacek Karwowski <jac.karwowski@gmail.com>
+FROM   haskell:8.10.4-buster
+LABEL  authors="Jacek Karwowski, Vikraman Choudhury"
 
-# RUN curl -sSL https://get.haskellstack.org/ | sh
-# RUN stack --resolver lts-17.2 --system-ghc install Agda-2.6.1.3
+RUN stack --resolver lts-17.15 --system-ghc install Agda-2.6.1.3
 
-# VOLUME /artifact/
-# COPY Pi/ /artifact/
-# COPY HoTT-Agda/ /artifact/
+VOLUME   /artifact/
+COPY   . /artifact/
+WORKDIR  /artifact/
+
+RUN make

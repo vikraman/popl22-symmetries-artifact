@@ -1,0 +1,5 @@
+name: popl22-symmetries-artifact
+include:
+  .
+  HoTT-Agda/core
+  HoTT-Agda/theorems
