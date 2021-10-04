@@ -89,6 +89,8 @@ is the main entrypoint to the project.
 
 #### Section 3
 
+This section presents the syntax of Pi and its soundness with respect to finite sets and bijections.
+
 | Claim       | Formalisation                                      | Note  |
 | ----------- | -------------------------------------------------- | ----- |
 | Figure 3    | [Pi/Syntax/Pi.agda](Pi/Syntax/Pi.agda)             |       |
@@ -96,6 +98,8 @@ is the main entrypoint to the project.
 
 #### Section 4
 
+This section develops the theory of univalent subuniverses, and the construction of $U_{fin}$ and its algebraic
+structure. We list the claims and their corresponding formalisations in the table below.
 
 | Claim            | Formalisation                                                                              | Note |
 | ---------------- | ------------------------------------------------------------------------------------------ | ---- |
