@@ -7,6 +7,11 @@
 This repository contains the accompanying formalisation for the POPL'22 paper "Symmetries in Reversible Programming:
 From Symmetric Rig Groupoids to Reversible Programming Languages".
 
+The purpose of this artifact is to:
+ - Provide a partial formalisation of the semantics presented in the paper and related results.
+ - Show applications of the semantics, using a collection of examples showing normalisation-by-evaluation, synthesis,
+   and equivalence of reversible circuits.
+
 ## Installation
 
 The formalisation has been checked using [Agda 2.6.1.3](https://hackage.haskell.org/package/Agda-2.6.1.3) and [HoTT-Agda
@@ -62,8 +67,8 @@ is the main entrypoint to the project.
 
 ### Structure
 
-  - `Common`: Common lemmas and definitions about natural numbers and lists, used thorought the project.
-  - `Coxeter`: Definitioninition and properties of Coxete relation and the rewriting system based on it.
+  - `Common`: Common lemmas and definitions about natural numbers and lists, used in the project.
+  - `Coxeter`: Definition and properties of the Coxeter relation and the rewriting system based on it.
   - `Equiv`: The main proof of equivalence between Pi and UFin.
   - `Examples`: Examples of reversible boolean circuits showing applications of the semantics.
   - `Experiments`: Various experiments, alternative approaches and earlier results.
@@ -104,14 +109,28 @@ is the main entrypoint to the project.
 
 #### Section 5
 
+The main theorems in the section - equivalences between `Sn`, normalization function image and Lehmer codes -  appear
+exactly in the Agda code. The intermediate steps were, however, slightly modified in the paper, as to simplify the
+presentation. The main difference is that the main proofs of the properties of Coxeter relations are initially done, for
+technical and historical reasons, without using parametrizing it over `n` - i.e., work on `List ℕ` instead of `List (Fin
+n)`, ([Pi/Coxeter/NonParametrized](Pi/Coxeter/NonParametrized)), and only later is this changed, in
+([Pi/Coxeter/Parametrized](Pi/Coxeter/Parametrized))
+
+Another difference is that, again for mostly the historical reasons, we have used two definitions of Lehmer codes
+([Pi/Lehmer/Lehmer.agda](Pi/Lehmer/Lehmer.agda) and [Pi/Lehmer/Lehmer2.agda](Pi/Lehmer/Lehmer2.agda)), and proved them
+to be equivalent.
+
+The functions marked with `{-# TERMINATING #-}` are proven to be terminating on paper, using the fact that the Coxeter
+reduction relation decreases the lexicographical order of words.
+
 | Claim              | Formalisation                                                                                                                                                                                                                           | Comment                                                            |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Proposition 5.1    |                                                                                                                                                                                                                                         |                                                                    |
-| Definition 5.2     |                                                                                                                                                                                                                                         |                                                                    |
-| Definition C.2     |                                                                                                                                                                                                                                         |                                                                    |
-| Proposition 5.3    |                                                                                                                                                                                                                                         |                                                                    |
-| Definition 5.4     |                                                                                                                                                                                                                                         |                                                                    |
-| Proposition 5.5    |                                                                                                                                                                                                                                         |                                                                    |
+| Proposition 5.1    | Not formalised and not used, included just for presentation purposes                                                                                                                                                                    |                                                                    |
+| Definition 5.2     | [HoTT-Agda/core/lib/groups/GeneratedGroup.agda](HoTT-Agda/core/lib/groups/GeneratedGroup.agda)                                                                                                                                          |                                                                    |
+| Definition C.2     | Not formalised and not used, included just for presentation purposes                                                                                                                                                                    |                                                                    |
+| Proposition 5.3    | [HoTT-Agda/core/lib/groups/GeneratedGroup.agda](HoTT-Agda/core/lib/groups/GeneratedGroup.agda)                                                                                                                                          |                                                                    |
+| Definition 5.4     | [HoTT-Agda/core/lib/groups/GeneratedGroup.agda](HoTT-Agda/core/lib/groups/GeneratedGroup.agda)                                                                                                                                          |                                                                    |
+| Proposition 5.5    | [HoTT-Agda/core/lib/groups/GeneratedGroup.agda](HoTT-Agda/core/lib/groups/GeneratedGroup.agda)                                                                                                                                          |                                                                    |
 | Definition 5.6     | [Pi/Coxeter/Coxeter.agda#L38](Pi/Coxeter/Coxeter.agda#L38) and [Pi/Coxeter/NonParametrized/Coxeter.agda#L38](Pi/Coxeter/NonParametrized/Coxeter.agda#L38)                                                                               | In the paper, missing succ n                                       |
 | Definition 5.7     | [Pi/Common/ListN.agda#L37](Pi/Common/ListN.agda#L37)                                                                                                                                                                                    | Not using Fin for the result                                       |
 | Definition 5.8     | [Pi/Coxeter/NonParametrized/ReductionRel.agda#L13](Pi/Coxeter/NonParametrized/ReductionRel.agda#L13)                                                                                                                                    | Slightly differerent (but equivalent) form of constructors         |
@@ -128,14 +147,14 @@ is the main entrypoint to the project.
 | Proposition 5.11.1 | [Pi/Coxeter/Norm.agda#L19](Pi/Coxeter/Norm.agda#L19)                                                                                                                                                                                    |                                                                    |
 | Proposition 5.11.2 | [Pi/Coxeter/Norm.agda#L25](Pi/Coxeter/Norm.agda#L25)                                                                                                                                                                                    |                                                                    |
 | Definition 5.12    | [Pi/Coxeter/Sn.agda#L22](Pi/Coxeter/Sn.agda#L22)                                                                                                                                                                                        |                                                                    |
-| Proposition 5.13.1 |                                                                                                                                                                                                                                         |                                                                    |
+| Proposition 5.13.1 | [Pi/Coxeter/Norm.agda](Pi/Coxeter/Norm.agda)                                                                                                                                                                                            |                                                                    |
 | Proposition 5.13.2 | [Pi/Coxeter/Norm.agda#L163](Pi/Coxeter/Norm.agda#L163)                                                                                                                                                                                  |                                                                    |
 | Theorem 5.14.1     | [Pi/Coxeter/Group.agda#L14](Pi/Coxeter/Group.agda#L14)                                                                                                                                                                                  |                                                                    |
 | Theorem 5.14.2     | [Pi/Coxeter/GeneratedGroup.agda#L11](Pi/Coxeter/GeneratedGroup.agda#L11)                                                                                                                                                                | ?                                                                  |
 | Definition 5.15    | [Pi/Lehmer/Lehmer2.agda#L7](Pi/Lehmer/Lehmer2.agda#L7)                                                                                                                                                                                  |                                                                    |
 | Definition 5.17    | [Pi/Coxeter/Lehmer2CoxeterEquiv.agda#L23](Pi/Coxeter/Lehmer2CoxeterEquiv.agda#L23) defined using [Pi/Coxeter/LehmerImmersion.agda#L19](Pi/Coxeter/LehmerImmersion.agda#L19)                                                             | Off-by-one error with the indices?                                 |
 | Theorem 5.18.1     | [Pi/Coxeter/NonParametrized/LehmerCanonical.agda#L232](Pi/Coxeter/NonParametrized/LehmerCanonical.agda#L232)                                                                                                                            |                                                                    |
-| Theorem 5.18.2     |                                                                                                                                                                                                                                         |                                                                    |
+| Theorem 5.18.2     | [Pi/Coxeter/NormEquiv.agda](Pi/Coxeter/NormEquiv.agda)                                                                                                                                                                                  |                                                                    |
 | Corollary 5.19     | [Pi/Coxeter/Lehmer2SnEquiv.agda#L20](Pi/Coxeter/Lehmer2SnEquiv.agda#L20)                                                                                                                                                                |                                                                    |
 | Definition 5.20    | [Pi/Lehmer/FinExcept.agda#L48](Pi/Lehmer/FinExcept.agda#L48)                                                                                                                                                                            |                                                                    |
 | Lemma 5.21.1       | [Pi/Lehmer/FinExcept.agda#L159](Pi/Lehmer/FinExcept.agda#L159)                                                                                                                                                                          |                                                                    |
@@ -145,23 +164,24 @@ is the main entrypoint to the project.
 
 #### Section 6
 
-| Claim           | Formalisation                                                  | Note  |
-| --------------- | -------------------------------------------------------------- | ----- |
-| Figure 7        | [Pi/Syntax/Pi+/NonIndexed.agda](Pi/Syntax/Pi+/NonIndexed.agda) |       |
-| Figure 8        | [Pi/Syntax/Pi^.agda](Pi/Syntax/Pi^.agda)                       |       |
-| Definition 6.1  | [Pi/Equiv/Translation2.agda](Pi/Equiv/Translation2.agda)       |       |
-| Lemma 6.2       | [Pi/Equiv/Translation2.agda](Pi/Equiv/Translation2.agda)       |       |
-| Definition 6.3  | [Pi/Equiv/Translation2.agda](Pi/Equiv/Translation2.agda)       | Check |
-| Theorem 6.4     | [Pi/Equiv/Translation2.agda](Pi/Equiv/Translation2.agda)       | Check |
-| Lemma 6.5       | [Pi/Syntax/Pi^Helpers.agda](Pi/Syntax/Pi^Helpers.agda)         |       |
-| Definition 6.6  | [Pi/Equiv/Equiv0Hat.agda](Pi/Equiv/Equiv0Hat.agda)             | Check |
-| Definition 6.7  | [Pi/Equiv/Equiv0Hat.agda](Pi/Equiv/Equiv0Hat.agda)             | Check |
-| Theorem 6.8     | [Pi/Equiv/Equiv0Hat.agda](Pi/Equiv/Equiv0Hat.agda)             | Check |
-| Definition 6.9  | [Pi/Equiv/Equiv1Norm.agda](Pi/Equiv/Equiv1Norm.agda)           |       |
-| Definition 6.10 | [Pi/Equiv/Equiv1Norm.agda](Pi/Equiv/Equiv1Norm.agda)           |       |
-| Theorem 6.11    | [Pi/Examples/Interp.agda](Pi/Examples/Interp.agda)             |       |
-| Definition 6.12 |                                                                |       |
-| Theorem 6.13    |                                                                |       |
+This section presents the equivalence between the syntax and semantics. In the formalisation, this is done by
+constructing functions eval/quote for 0, 1, and 2-cells, between each variant of the language and finally with
+$U_{fin}$. Instead of following the list of claims in the text, we state what each file does.
+
+ - [Pi/Syntax/Pi+/NonIndexed.agda](Pi/Syntax/Pi+/NonIndexed.agda): (Non-indexed) syntax for Pi+.
+ - [Pi/Syntax/Pi+/Indexed.agda](Pi/Syntax/Pi+/Indexed.agda): (Indexed) syntax for Pi+.
+ - [Pi/Syntax/Pi^.agda](Pi/Syntax/Pi^.agda): Syntax for Pi^.
+ - [Pi/Equiv/Equiv0.agda](Pi/Equiv/Equiv0.agda): The proof of equivalence between Pi+ types and 0-cells in UFin. A composition of:
+  - [Pi/Equiv/Equiv0Hat.agda](Pi/Equiv/Equiv0Hat.agda): The proof of equivalence between Pi+ types and Pi^ types.
+   - [Pi/Equiv/Equiv0Norm.agda](Pi/Equiv/Equiv0Norm.agda): The proof of equivalence between Pi^ types (natural numbers) and 0-cells in UFin.
+ - [Pi/Equiv/Equiv1.agda](Pi/Equiv/Equiv1.agda): The proof of equivalence between the 1-combinators of Pi+ and 1-paths in UFin. A composition of:
+  - [Pi/Equiv/Equiv1Hat.agda](Pi/Equiv/Equiv1Hat.agda): The proof of equivalence between Pi+ 1-combinators and Pi^ 1-combinators.
+   - [Pi/Equiv/Equiv1Norm.agda](Pi/Equiv/Equiv1Norm.agda): The proof of equivalence between Pi^ 1-combinators and 1-cells in UFin.
+ - [Pi/Equiv/Equiv2.agda](Pi/Equiv/Equiv2.agda): The proof of equivalence between the 2-combinators of Pi+ and 2-paths in UFin. A composition of:
+  - [Pi/Equiv/Equiv2Hat.agda](Pi/Equiv/Equiv2Hat.agda): The proof of equivalence between Pi+ 1-combinators and Pi^ 1-combinators.
+   - [Pi/Equiv/Equiv2Norm.agda](Pi/Equiv/Equiv2Norm.agda): The proof of equivalence between Pi^ 2-combinators and 2-paths in UFin.
+ - [Pi/Equiv/Translation.agda](Pi/Equiv/Translation.agda), [Pi/Equiv/Translation2.agda](Pi/Equiv/Translation2.agda): Translation of Pi to Pi+ and back.
+ - [Pi/Examples/Interp.agda](Pi/Examples/Interp.agda) - The interpreter for Pi.
 
 #### Section 7
 
