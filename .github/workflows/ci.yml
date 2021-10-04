@@ -41,3 +41,14 @@ jobs:
 
       - name: Check Pi
         run: make -j3
+
+      - name: Generate html
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: make html
+
+      - name: Deploy html
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: html
