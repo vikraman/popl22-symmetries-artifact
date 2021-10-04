@@ -185,9 +185,18 @@ $U_{fin}$. Instead of following the list of claims in the text, we state what ea
 
 #### Section 7
 
-| Claim          | Formalisation |
-| -------------- | ------------- |
-| Definition 7.1 |               |
+The formalisation includes several examples, including those mentioned in the paper, and several others.
+
+ - [Pi/Examples/Adder.agda](Pi/Examples/Adder.agda): Reversible 3-bit/4-bit adder.
+ - [Pi/Examples/Base.agda](Pi/Examples/Base.agda): Helpers and tests.
+ - [Pi/Examples/Copy.agda](Pi/Examples/Copy.agda): Reversible copy.
+ - [Pi/Examples/ExamplesL.lagda](Pi/Examples/ExamplesL.lagda): Examples used in the paper text, `reversibleOrNorm`
+   function  is implemented as `adder3` in [Pi/Examples/Adder.agda](Pi/Examples/Adder.agda).
+ - [Pi/Examples/ExpMod.agda](Pi/Examples/ExpMod.agda): Reversible exponentiation modulo 2^n.
+ - [Pi/Examples/Incr.agda](Pi/Examples/Incr.agda): Reversible increment.
+ - [Pi/Examples/Interp.agda](Pi/Examples/Interp.agda): Interpreters for 1-combinators of Pi, Pi+, Pi^, and various tests.
+ - [Pi/Examples/Reset.agda](Pi/Examples/Reset.agda): Reversible reset.
+ - [Pi/Examples/Toffoli.agda](Pi/Examples/Toffoli.agda): Toffoli gate (controlled controlled NOT)
 
 ### Comments
 
