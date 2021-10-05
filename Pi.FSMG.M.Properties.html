@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Pi.FSMG.M.Properties</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--without-K</a> <a id="25" class="Pragma">--exact-split</a> <a id="39" class="Pragma">--rewriting</a> <a id="51" class="Symbol">#-}</a>
+
+<a id="56" class="Keyword">module</a> <a id="63" href="Pi.FSMG.M.Properties.html" class="Module">Pi.FSMG.M.Properties</a> <a id="84" class="Keyword">where</a>
+
+<a id="91" class="Keyword">open</a> <a id="96" class="Keyword">import</a> <a id="103" href="lib.Base.html" class="Module">lib.Base</a>
+<a id="112" class="Keyword">open</a> <a id="117" class="Keyword">import</a> <a id="124" href="lib.Equivalence.html" class="Module">lib.Equivalence</a>
+<a id="140" class="Keyword">open</a> <a id="145" class="Keyword">import</a> <a id="152" href="lib.NType.html" class="Module">lib.NType</a>
+<a id="162" class="Keyword">open</a> <a id="167" class="Keyword">import</a> <a id="174" href="lib.types.Truncation.html" class="Module">lib.types.Truncation</a>
+
+<a id="196" class="Keyword">open</a> <a id="201" class="Keyword">import</a> <a id="208" href="Pi.Common.Extra.html" class="Module">Pi.Common.Extra</a>
+<a id="224" class="Keyword">open</a> <a id="229" class="Keyword">import</a> <a id="236" href="Pi.FSMG.M.html" class="Module">Pi.FSMG.M</a> <a id="246" class="Symbol">as</a> <a id="249" class="Module">M</a>
+<a id="251" class="Keyword">open</a> <a id="256" class="Keyword">import</a> <a id="263" href="Pi.FSMG.SMG.html" class="Module">Pi.FSMG.SMG</a>
+
+<a id="276" class="Keyword">module</a> <a id="283" href="Pi.FSMG.M.Properties.html#283" class="Module">_</a> <a id="285" class="Symbol">{</a><a id="286" href="Pi.FSMG.M.Properties.html#286" class="Bound">i</a><a id="287" class="Symbol">}</a> <a id="289" class="Symbol">{</a><a id="290" href="Pi.FSMG.M.Properties.html#290" class="Bound">A</a> <a id="292" class="Symbol">:</a> <a id="294" href="lib.Base.html#1144" class="Function">Type</a> <a id="299" href="Pi.FSMG.M.Properties.html#286" class="Bound">i</a><a id="300" class="Symbol">}</a> <a id="302" class="Keyword">where</a>
+
+  <a id="311" class="Keyword">instance</a>
+    <a id="324" href="Pi.FSMG.M.Properties.html#324" class="Function">M-SMGStructure</a> <a id="339" class="Symbol">:</a> <a id="341" href="Pi.FSMG.SMG.html#298" class="Record">SMGStructure</a> <a id="354" class="Symbol">(</a><a id="355" href="Pi.FSMG.M.html#268" class="Postulate">M</a> <a id="357" href="Pi.FSMG.M.Properties.html#290" class="Bound">A</a><a id="358" class="Symbol">)</a>
+    <a id="364" href="Pi.FSMG.M.Properties.html#324" class="Function">M-SMGStructure</a> <a id="379" class="Symbol">=</a> <a id="381" href="Pi.Common.Extra.html#136" class="Postulate">TODO</a>
+
+  <a id="389" class="Keyword">module</a> <a id="396" href="Pi.FSMG.M.Properties.html#396" class="Module">_</a> <a id="398" class="Symbol">{</a><a id="399" href="Pi.FSMG.M.Properties.html#399" class="Bound">j</a><a id="400" class="Symbol">}</a> <a id="402" class="Symbol">{</a><a id="403" href="Pi.FSMG.M.Properties.html#403" class="Bound">N</a> <a id="405" class="Symbol">:</a> <a id="407" href="lib.Base.html#1144" class="Function">Type</a> <a id="412" href="Pi.FSMG.M.Properties.html#399" class="Bound">j</a><a id="413" class="Symbol">}</a> <a id="415" class="Symbol">{{</a><a id="417" href="Pi.FSMG.M.Properties.html#417" class="Bound">_</a> <a id="419" class="Symbol">:</a> <a id="421" href="lib.NType.html#406" class="Record">has-level</a> <a id="431" class="Number">1</a> <a id="433" href="Pi.FSMG.M.Properties.html#403" class="Bound">N</a><a id="434" class="Symbol">}}</a> <a id="437" class="Symbol">{{</a><a id="439" href="Pi.FSMG.M.Properties.html#439" class="Bound">GN</a> <a id="442" class="Symbol">:</a> <a id="444" href="Pi.FSMG.SMG.html#298" class="Record">SMGStructure</a> <a id="457" href="Pi.FSMG.M.Properties.html#403" class="Bound">N</a><a id="458" class="Symbol">}}</a> <a id="461" class="Keyword">where</a>
+
+    <a id="472" href="Pi.FSMG.M.Properties.html#472" class="Function">M-Universal</a> <a id="484" class="Symbol">:</a> <a id="486" href="Pi.FSMG.SMG.html#1060" class="Record">SMFunctor</a> <a id="496" class="Symbol">(</a><a id="497" href="Pi.FSMG.M.html#268" class="Postulate">M</a> <a id="499" href="Pi.FSMG.M.Properties.html#290" class="Bound">A</a><a id="500" class="Symbol">)</a> <a id="502" href="Pi.FSMG.M.Properties.html#403" class="Bound">N</a> <a id="504" href="lib.Equivalence.html#4492" class="Function Operator">≃</a> <a id="506" class="Symbol">(</a><a id="507" href="Pi.FSMG.M.Properties.html#290" class="Bound">A</a> <a id="509" class="Symbol">→</a> <a id="511" href="Pi.FSMG.M.Properties.html#403" class="Bound">N</a><a id="512" class="Symbol">)</a>
+    <a id="518" href="Pi.FSMG.M.Properties.html#472" class="Function">M-Universal</a> <a id="530" class="Symbol">=</a> <a id="532" href="Pi.Common.Extra.html#136" class="Postulate">TODO</a>
+</pre></body></html>
