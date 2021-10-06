@@ -54,7 +54,7 @@ $ docker run -it --rm vikraman/popl22-symmetries-artifact bash
 
 ## Evaluation
 
-We provide a [Makefile](Makefile) whose default target checks the [Pi/Everything.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Everthing.agda) file.
+We provide a [Makefile](Makefile) whose default target checks the [Pi/Everything.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Everything.agda) file.
 
 ```sh
 $ make
