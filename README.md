@@ -95,8 +95,8 @@ $ make todos
 This repository contains the formalisation of the denotational semantics of Pi, accompanying the paper.
 `Pi/Everything.agda` is the main entrypoint to the project.
 
-Each subdirectory has its own README file, which describes the files in that directory, and is a good starting point 
-to understanding the high-level structure of the code.
+**Each subdirectory has its own README file, which describes the files in that directory, and is a good starting point 
+to understanding the high-level structure of the code.**
 
 ### Structure
 
@@ -146,16 +146,18 @@ structure. We list the claims and their corresponding formalisations in the tabl
 
 #### Section 5
 
-The main theorems in the section - equivalences between `Sn`, normalization function image and Lehmer codes -  appear
+The main theorems in the section - equivalences between `Sn`, normalization function image and Lehmer codes - appear
 exactly in the Agda code. The intermediate steps were, however, slightly modified in the paper, as to simplify the
 presentation. The main difference is that the main proofs of the properties of Coxeter relations are initially done, for
 technical and historical reasons, without using parametrizing it over `n` - i.e., work on `List ℕ` instead of `List (Fin
-n)`, ([Pi/Coxeter/NonParametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/NonParametrized)), and only later is this changed, in
-([Pi/Coxeter/Parametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/Parametrized))
+n)`, ([Pi/Coxeter/NonParametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/NonParametrized)), and
+only later is this changed, in
+([Pi/Coxeter/Parametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/Parametrized)).
 
 Another difference is that, again for mostly the historical reasons, we have used two definitions of Lehmer codes
-([Pi/Lehmer/Lehmer.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer.agda) and [Pi/Lehmer/Lehmer2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer2.agda)), and proved them
-to be equivalent.
+([Pi/Lehmer/Lehmer.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer.agda) and
+[Pi/Lehmer/Lehmer2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer2.agda)), and proved them to be
+equivalent.
 
 The functions marked with `{-# TERMINATING #-}` are proven to be terminating on paper, using the fact that the Coxeter
 reduction relation decreases the lexicographical order of words.
