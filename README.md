@@ -95,6 +95,9 @@ $ make todos
 This repository contains the formalisation of the denotational semantics of Pi, accompanying the paper.
 `Pi/Everything.agda` is the main entrypoint to the project.
 
+Each subdirectory has its own README file, which describes the files in that directory, and is a good starting point 
+to understanding the high-level structure of the code.
+
 ### Structure
 
   - `Pi.Common`: Common lemmas and definitions about natural numbers and lists, used in the project.
