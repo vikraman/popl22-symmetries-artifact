@@ -11,7 +11,9 @@ html: index.agda $(AGDA_SRCS)
 	agda --html index.agda
 
 todos: $(AGDA_SRCS)
-	find -H Pi -type f -name '*.agda' -exec grep -n --colour=auto 'TODO\!' {} \+
+	find -H Pi -type f -name '*.agda' \
+		-not -path 'Pi/Experiments/*' -not -path 'Pi/FSMG/*' \
+		-exec grep -E -n --colour=auto 'TODO' {} \+
 
 clean:
 	rm -f $(AGDA_BINS)
