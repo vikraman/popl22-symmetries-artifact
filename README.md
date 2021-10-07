@@ -4,14 +4,14 @@
 [![ci](https://github.com/vikraman/popl22-symmetries-artifact/actions/workflows/ci.yml/badge.svg)](https://github.com/vikraman/popl22-symmetries-artifact)
 [![docker](https://github.com/vikraman/popl22-symmetries-artifact/actions/workflows/docker.yml/badge.svg)](https://hub.docker.com/r/vikraman/popl22-symmetries-artifact)
 [![docker pulls](https://img.shields.io/docker/pulls/vikraman/popl22-symmetries-artifact.svg)](https://hub.docker.com/r/vikraman/popl22-symmetries-artifact)
-[![doi](https://zenodo.org/badge/DOI/10.5281/zenodo.5552650.svg)](https://doi.org/10.5281/zenodo.5552650)
+[![doi](https://zenodo.org/badge/DOI/10.5281/zenodo.5554623.svg)](https://doi.org/10.5281/zenodo.5554623)
 
 This repository contains the accompanying formalisation for the POPL'22 paper "Symmetries in Reversible Programming:
 From Symmetric Rig Groupoids to Reversible Programming Languages".
 
 - Main Repository: https://github.com/vikraman/popl22-symmetries-artifact
 - Source Code: https://vikraman.github.io/popl22-symmetries-artifact
-- Zenodo: https://zenodo.org/record/5552650
+- Zenodo: https://zenodo.org/record/5554623
 
 The purpose of this artifact is to:
 
