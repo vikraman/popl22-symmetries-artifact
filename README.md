@@ -99,10 +99,11 @@ $ make todos
 ## Documentation
 
 This repository contains the formalisation of the denotational semantics of Pi, accompanying the paper.
-`Pi/Everything.agda` is the main entrypoint to the project.
+`Pi/Everything.agda` is the main entrypoint to the project. The Agda source is also hosted as interactive html
+[here](https://vikraman.github.io/popl22-symmetries-artifact).
 
-**Each subdirectory has its own README file, which describes the files in that directory, and is a good starting point 
-to understanding the high-level structure of the code.**
+Each subdirectory has its own README file, which describes the files in that directory, and is a good starting point to
+understanding the high-level structure of the code.
 
 ### Structure
 
