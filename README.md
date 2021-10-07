@@ -235,7 +235,9 @@ The formalisation includes several examples, including those mentioned in the pa
 
 The files are more-or-less self-documented -- we define each reversible circuit, compute their normal forms, then quote
 them back, step-by-step using the semantics. One can inspect each term using Agda's interactive mode, using the "Compute
-Normal Form" command. Note that computing normal forms for some circuits can be _really slow_.
+Normal Form" command (in Emacs, make sure to add `C-u C-u` to compute the most normalised form).
+
+Note that computing normal forms for some circuits can be _really slow_.
 
  - [Pi/Examples/Adder.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Examples/Adder.agda): Reversible 3-bit/4-bit adder.
  - [Pi/Examples/Base.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Examples/Base.agda): Helpers and tests.
