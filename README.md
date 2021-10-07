@@ -252,17 +252,17 @@ Normal Form" command. Note that computing normal forms for some circuits can be 
 
   - In the formalisation, there is an additional step of going through Pi+ variant where types are indexed by their
     cardinality, this makes it easier to write some proofs which perform induction on the syntax, and eliminate some
-    absurd cases.
-  - Proving termination for certain functions is difficult in Agda, and we assert they're terminating. It is easy to see
-    on paper that they terminate.
+    absurd cases (using the `eq-size` rewrite).
+  - Proving termination for certain functions is difficult in Agda, and we assert they're terminating. On paper, it is
+    easy to see that they terminate.
   - In HoTT-Agda, univalence/HITs are asserted as postulates, and they don't compute. The proofs rely on beta/eta
-    reduction done "by hand", which is not explicitly done in the paper.
-  - Using the formalised rewriting system to compute the normalisation function is very slow. We include several
+    reduction done "by hand", which is not explicitly done in the paper. This makes some proofs verbose.
+  - Using the formalised rewriting system to compute the normalisation function is _very_ slow. We include several
     examples in the formalisation and it takes a while to compute them. Some computations are intractable, and we have
     left them commented out.
-  - Translating commutative diagrams for large coherence results to Pi combinators is tedious. Similarly, using
-    decidable equality and case matches to define large functions and reductions and then proving things about them is
-    tedious. Some parts of the formalisation have been left as TODOs but we provide references for them, or show how to
-    prove them on paper.
-  - `FSMG` is incomplete and left as future work. `Experiments` contains alternative definitions using HITs and some
-    earlier attempts at proving the main equivalence.
+  - Translating commutative diagrams for large coherence results to Pi syntax using combinators is tedious. Similarly,
+    using decidable equality and case matches to define large functions and reductions and then proving things about
+    them is tedious. Some parts of the formalisation have been left as `TODO`s but we provide references for them, or
+    give a proof outline on paper.
+  - `FSMG` is a HIT for free symmetric monoida groupoids, this is experimental and left as future work. `Experiments`
+    contains alternative definitions using HITs and some earlier attempts at proving the main equivalence.
