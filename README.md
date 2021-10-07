@@ -18,7 +18,7 @@ The purpose of this artifact is to:
  - Provide a partial formalisation of the semantics presented in the paper and related results.
 
  - Show applications of the semantics, using a collection of examples showing normalisation-by-evaluation, synthesis,
-   and equivalence of reversible circuits.
+   and equivalence of reversible circuits written in the Pi language.
 
 ## Installation
 
@@ -38,8 +38,9 @@ The easiest way to install Agda on your machine is using stack.
 $ stack install Agda-2.6.1.3
 ```
 
-Then, clone this repository and use the provided Makefile. The repository uses a
-[submodule](https://github.com/vikraman/2DTypes) which contains the main formalisation (and more related work).
+Then, clone this repository (including submodules recursively) and use the provided Makefile. The repository uses a
+[submodule](https://github.com/vikraman/2DTypes) which contains the main formalisation and library submodules (and more
+related work on Pi).
 
 ```sh
 $ git clone --recursive https://github.com/vikraman/popl22-symmetries-artifact
@@ -51,7 +52,7 @@ manager](https://github.com/AlDanial/cloc#install-via-package-manager).
 
 ### Option 2: Using our docker image
 
-We also provide a prebuilt docker image with all tools and libraries installed.
+We also provide a prebuilt docker image (linux/amd64) with all tools and libraries installed.
 
 ```sh
 $ docker pull vikraman/popl22-symmetries-artifact
@@ -72,13 +73,13 @@ Or, it can also exhaustively check every file in the Pi directory.
 $ make reallyall
 ```
 
-Alternatively, you can check individual files in agda, or load up the emacs mode to interactively examine a file.
+Alternatively, you can check individual files in agda, and step through each term interactively. 
 
 To step through the proofs and examples interactively, one has to use the interactive Agda mode, which is available for
 Emacs and VSCode. To use it:
 
  - In Emacs, simply use `agda-mode locate` and load the file to get the major mode for Agda. Use `C-c C-l` to load the
-   Agda file, and `C-u C-c C-n` to compute the normal form of a term.
+   Agda file, and `C-u C-u C-c C-n` to compute the normal form of a term.
 
  - In VSCode, install `agda-mode` extension and point it to the location of Agda executable in your system. The usage
    instructions are provided in the extension's documentation. To load the file, use `C-c C-l`. After loading the file,
@@ -95,6 +96,8 @@ To list the `TODO`s in the formalisation, run:
 ```
 $ make todos
 ```
+
+As a convention, the ones marked `TODO!` are the important ones, and the ones marked `TODO-` are trivial.
 
 ## Documentation
 
@@ -153,15 +156,15 @@ structure. We list the claims and their corresponding formalisations in the tabl
 
 #### Section 5
 
-The main theorems in the section - equivalences between `Sn`, normalization function image and Lehmer codes - appear
-exactly in the Agda code. The intermediate steps were, however, slightly modified in the paper, as to simplify the
+The main theorems in the section - equivalences between `Sn`, normalisation function image and Lehmer codes - appear
+exactly in the Agda code. The intermediate steps were, however, slightly modified in the paper, to simplify the
 presentation. The main difference is that the main proofs of the properties of Coxeter relations are initially done, for
-technical and historical reasons, without using parametrizing it over `n` - i.e., work on `List ℕ` instead of `List (Fin
-n)`, ([Pi/Coxeter/NonParametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/NonParametrized)), and
-only later is this changed, in
+technical and historical reasons, without using parametrising it over `n` - i.e., working on `List ℕ` instead of `List
+(Fin n)`, ([Pi/Coxeter/NonParametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/NonParametrized)),
+and only later is this changed, in
 ([Pi/Coxeter/Parametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/Parametrized)).
 
-Another difference is that, again for mostly the historical reasons, we have used two definitions of Lehmer codes
+Another difference is that, again for mostly historical reasons, we have used two definitions of Lehmer codes
 ([Pi/Lehmer/Lehmer.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer.agda) and
 [Pi/Lehmer/Lehmer2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer2.agda)), and proved them to be
 equivalent.
@@ -231,7 +234,8 @@ Instead of following the list of claims in the text, we state what each file doe
 
 #### Section 7
 
-The formalisation includes several examples, including those mentioned in the paper, and others.
+The formalisation includes several examples, including those mentioned in the paper, and others. Despite postulates, the
+examples are written in such a way that they _will compute_ (with some caveats).
 
 The files are more-or-less self-documented -- we define each reversible circuit, compute their normal forms, then quote
 them back, step-by-step using the semantics. One can inspect each term using Agda's interactive mode, using the "Compute
@@ -267,5 +271,5 @@ Note that computing normal forms for some circuits can be _really slow_.
     using decidable equality and case matches to define large functions and reductions and then proving things about
     them is tedious. Some parts of the formalisation have been left as `TODO`s but we provide references for them, or
     give a proof outline on paper.
-  - `FSMG` is a HIT for free symmetric monoida groupoids, this is experimental and left as future work. `Experiments`
+  - `FSMG` is a HIT for free symmetric monoidal groupoids, this is experimental and left as future work. `Experiments`
     contains alternative definitions using HITs and some earlier attempts at proving the main equivalence.
