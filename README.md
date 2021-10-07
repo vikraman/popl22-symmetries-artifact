@@ -97,6 +97,8 @@ To list the `TODO`s in the formalisation, run:
 $ make todos
 ```
 
+As a convention, the ones marked `TODO!` are the important ones, and the ones marked `TODO-` are trivial.
+
 ## Documentation
 
 This repository contains the formalisation of the denotational semantics of Pi, accompanying the paper.
