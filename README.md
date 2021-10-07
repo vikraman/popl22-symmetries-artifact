@@ -79,7 +79,7 @@ To step through the proofs and examples interactively, one has to use the intera
 Emacs and VSCode. To use it:
 
  - In Emacs, simply use `agda-mode locate` and load the file to get the major mode for Agda. Use `C-c C-l` to load the
-   Agda file, and `C-u C-c C-n` to compute the normal form of a term.
+   Agda file, and `C-u C-u C-c C-n` to compute the normal form of a term.
 
  - In VSCode, install `agda-mode` extension and point it to the location of Agda executable in your system. The usage
    instructions are provided in the extension's documentation. To load the file, use `C-c C-l`. After loading the file,
