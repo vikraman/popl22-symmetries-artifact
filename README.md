@@ -157,14 +157,14 @@ structure. We list the claims and their corresponding formalisations in the tabl
 #### Section 5
 
 The main theorems in the section - equivalences between `Sn`, normalisation function image and Lehmer codes - appear
-exactly in the Agda code. The intermediate steps were, however, slightly modified in the paper, as to simplify the
+exactly in the Agda code. The intermediate steps were, however, slightly modified in the paper, to simplify the
 presentation. The main difference is that the main proofs of the properties of Coxeter relations are initially done, for
-technical and historical reasons, without using parametrising it over `n` - i.e., work on `List ℕ` instead of `List (Fin
-n)`, ([Pi/Coxeter/NonParametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/NonParametrized)), and
-only later is this changed, in
+technical and historical reasons, without using parametrising it over `n` - i.e., working on `List ℕ` instead of `List
+(Fin n)`, ([Pi/Coxeter/NonParametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/NonParametrized)),
+and only later is this changed, in
 ([Pi/Coxeter/Parametrized](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Coxeter/Parametrized)).
 
-Another difference is that, again for mostly the historical reasons, we have used two definitions of Lehmer codes
+Another difference is that, again for mostly historical reasons, we have used two definitions of Lehmer codes
 ([Pi/Lehmer/Lehmer.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer.agda) and
 [Pi/Lehmer/Lehmer2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Lehmer/Lehmer2.agda)), and proved them to be
 equivalent.
@@ -271,5 +271,5 @@ Note that computing normal forms for some circuits can be _really slow_.
     using decidable equality and case matches to define large functions and reductions and then proving things about
     them is tedious. Some parts of the formalisation have been left as `TODO`s but we provide references for them, or
     give a proof outline on paper.
-  - `FSMG` is a HIT for free symmetric monoida groupoids, this is experimental and left as future work. `Experiments`
+  - `FSMG` is a HIT for free symmetric monoidal groupoids, this is experimental and left as future work. `Experiments`
     contains alternative definitions using HITs and some earlier attempts at proving the main equivalence.
