@@ -226,7 +226,7 @@ $U_{fin}$. Instead of following the list of claims in the text, we state what ea
  - [Pi/Equiv/Equiv2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Equiv/Equiv2.agda): The proof of equivalence between the 2-combinators of Pi+ and 2-paths in UFin. A composition of:
   - [Pi/Equiv/Equiv2Hat.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Equiv/Equiv2Hat.agda): The proof of equivalence between Pi+ 1-combinators and Pi^ 1-combinators.
    - [Pi/Equiv/Equiv2Norm.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Equiv/Equiv2Norm.agda): The proof of equivalence between Pi^ 2-combinators and 2-paths in UFin.
- - [Pi/Equiv/Translation.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Equiv/Translation.agda), [Pi/Equiv/Translation2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Equiv/Translation2.agda): Translation of Pi to Pi+ and back.
+ - [Pi/Equiv/Translation2.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Equiv/Translation2.agda): Translation of Pi to Pi+ and back.
  - [Pi/Examples/Interp.agda](https://github.com/vikraman/2DTypes/blob/popl22/Pi/Examples/Interp.agda) - The interpreter for Pi.
 
 #### Section 7
