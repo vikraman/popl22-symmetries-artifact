@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Choudhury
+    given-names: Vikraman
+    orcid: https://orcid.org/0000-0003-2030-8056
+  - family-names: Karwowski
+    given-names: Jacek
+title: "Artifact for Symmetries in Reversible Programming"
+version: 0.1
+doi: 10.5281/zenodo.5552650
+date-released: 2021-10-07

@@ -1,3 +1,4 @@
 [submodule "submodules/2DTypes"]
 	path = submodules/2DTypes
 	url = https://github.com/vikraman/2DTypes.git
+	branch = popl22
