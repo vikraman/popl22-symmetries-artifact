@@ -9,6 +9,10 @@
 This repository contains the accompanying formalisation for the POPL'22 paper "Symmetries in Reversible Programming:
 From Symmetric Rig Groupoids to Reversible Programming Languages".
 
+- Main Repository: https://github.com/vikraman/popl22-symmetries-artifact
+- Source Code: https://vikraman.github.io/popl22-symmetries-artifact
+- Zenodo: https://zenodo.org/record/5552650
+
 The purpose of this artifact is to:
 
  - Provide a partial formalisation of the semantics presented in the paper and related results.
@@ -34,7 +38,8 @@ The easiest way to install Agda on your machine is using stack.
 $ stack install Agda-2.6.1.3
 ```
 
-Then, clone this repository and use the provided Makefile.
+Then, clone this repository and use the provided Makefile. The repository uses a
+[submodule](https://github.com/vikraman/2DTypes) which contains the main formalisation (and more related work).
 
 ```sh
 $ git clone --recursive https://github.com/vikraman/popl22-symmetries-artifact
