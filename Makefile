@@ -15,6 +15,9 @@ todos: $(AGDA_SRCS)
 		-not -path 'Pi/Experiments/*' -not -path 'Pi/FSMG/*' \
 		-exec grep -E -n --colour=auto 'TODO' {} \+
 
+cloc:
+    cloc Pi/
+
 clean:
 	rm -f $(AGDA_BINS)
 
