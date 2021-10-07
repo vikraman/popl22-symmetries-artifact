@@ -234,7 +234,8 @@ Instead of following the list of claims in the text, we state what each file doe
 
 #### Section 7
 
-The formalisation includes several examples, including those mentioned in the paper, and others.
+The formalisation includes several examples, including those mentioned in the paper, and others. Despite postulates, the
+examples are written in such a way that they _will compute_.
 
 The files are more-or-less self-documented -- we define each reversible circuit, compute their normal forms, then quote
 them back, step-by-step using the semantics. One can inspect each term using Agda's interactive mode, using the "Compute
