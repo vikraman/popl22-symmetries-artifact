@@ -48,37 +48,4 @@
 
 <a id="++r+"></a><a id="1753" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1753" class="Function">++r+</a> <a id="1758" class="Symbol">:</a> <a id="1760" class="Symbol">{</a><a id="1761" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1761" class="Bound">m1</a> <a id="1764" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1764" class="Bound">m2</a> <a id="1767" class="Symbol">:</a> <a id="1769" href="Pi.Common.ListN.html#266" class="Datatype">Listℕ</a><a id="1774" class="Symbol">}</a> <a id="1776" class="Symbol">-&gt;</a> <a id="1779" class="Symbol">(</a><a id="1780" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1780" class="Bound">r</a> <a id="1782" class="Symbol">:</a> <a id="1784" href="Pi.Common.ListN.html#266" class="Datatype">Listℕ</a><a id="1789" class="Symbol">)</a> <a id="1791" class="Symbol">-&gt;</a> <a id="1794" class="Symbol">(</a><a id="1795" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1761" class="Bound">m1</a> <a id="1798" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#332" class="Datatype Operator">≅+</a> <a id="1801" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1764" class="Bound">m2</a><a id="1803" class="Symbol">)</a> <a id="1805" class="Symbol">-&gt;</a> <a id="1808" class="Symbol">((</a><a id="1810" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1761" class="Bound">m1</a> <a id="1813" href="Pi.Common.ListN.html#343" class="Function Operator">++</a> <a id="1816" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1780" class="Bound">r</a><a id="1817" class="Symbol">)</a> <a id="1819" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#332" class="Datatype Operator">≅+</a> <a id="1822" class="Symbol">(</a><a id="1823" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1764" class="Bound">m2</a> <a id="1826" href="Pi.Common.ListN.html#343" class="Function Operator">++</a> <a id="1829" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1780" class="Bound">r</a><a id="1830" class="Symbol">))</a>
 <a id="1833" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1753" class="Function">++r+</a> <a id="1838" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1838" class="Bound">r</a> <a id="1840" class="Symbol">(</a><a id="1841" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#373" class="InductiveConstructor">trans≅+</a> <a id="1849" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1849" class="Bound">x</a> <a id="1851" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1851" class="Bound">p</a><a id="1852" class="Symbol">)</a> <a id="1854" class="Symbol">=</a> <a id="1856" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#373" class="InductiveConstructor">trans≅+</a> <a id="1864" class="Symbol">(</a><a id="1865" href="Pi.Coxeter.NonParametrized.ReductionRel.html#2990" class="Function">++r≅</a> <a id="1870" class="Symbol">_</a> <a id="1872" class="Symbol">_</a> <a id="1874" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1838" class="Bound">r</a> <a id="1876" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1849" class="Bound">x</a><a id="1877" class="Symbol">)</a> <a id="1879" class="Symbol">(</a><a id="1880" href="Pi.Coxeter.NonParametrized.ReductionRel.html#3774" class="Function">++r</a> <a id="1884" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1838" class="Bound">r</a> <a id="1886" href="Pi.Coxeter.NonParametrized.ReductionRel%252B.html#1851" class="Bound">p</a><a id="1887" class="Symbol">)</a>
-
-<a id="1890" class="Comment">-- ≅-abs-l : {x : ℕ} -&gt; (x ∷ nil) ≅ nil -&gt; ⊥</a>
-<a id="1935" class="Comment">-- ≅-abs-l (cancel≅ nil r .(_ ∷ nil) .nil () defmf)</a>
-<a id="1987" class="Comment">-- ≅-abs-l (cancel≅ (x ∷ nil) r .(_ ∷ nil) .nil () defmf)</a>
-<a id="2045" class="Comment">-- ≅-abs-l (cancel≅ (x ∷ x₁ ∷ l) r .(_ ∷ nil) .nil () defmf)</a>
-<a id="2106" class="Comment">-- ≅-abs-l (swap≅ x nil r .(_ ∷ nil) .nil () defmf)</a>
-<a id="2158" class="Comment">-- ≅-abs-l (swap≅ x (x₁ ∷ nil) r .(_ ∷ nil) .nil () defmf)</a>
-<a id="2217" class="Comment">-- ≅-abs-l (swap≅ x (x₁ ∷ x₂ ∷ l) r .(_ ∷ nil) .nil () defmf)</a>
-<a id="2279" class="Comment">-- ≅-abs-l (long≅ k nil r .(_ ∷ nil) .nil defm ())</a>
-<a id="2330" class="Comment">-- ≅-abs-l (long≅ k (x ∷ l) r .(_ ∷ nil) .nil defm ())</a>
-
-<a id="2386" class="Comment">-- ≅-abs-r : {x : ℕ} -&gt; nil ≅ (x ∷ nil) -&gt; ⊥</a>
-<a id="2431" class="Comment">-- ≅-abs-r (cancel≅ nil r .nil .(_ ∷ nil) () defmf)</a>
-<a id="2483" class="Comment">-- ≅-abs-r (cancel≅ (x ∷ l) r .nil .(_ ∷ nil) () defmf)</a>
-<a id="2539" class="Comment">-- ≅-abs-r (swap≅ x nil r .nil .(_ ∷ nil) () defmf)</a>
-<a id="2591" class="Comment">-- ≅-abs-r (swap≅ x (x₁ ∷ l) r .nil .(_ ∷ nil) () defmf)</a>
-<a id="2648" class="Comment">-- ≅-abs-r (long≅ k nil r .nil .(_ ∷ nil) () defmf)</a>
-<a id="2700" class="Comment">-- ≅-abs-r (long≅ k (x ∷ l) r .nil .(_ ∷ nil) () defmf)</a>
-<a id="2756" class="Comment">-- --</a>
-<a id="2762" class="Comment">-- empty-reduction : {m : Listℕ} -&gt; (nil ≅ m) -&gt; ⊥</a>
-<a id="2813" class="Comment">-- empty-reduction (cancel≅ nil r .nil _ () defmf)</a>
-<a id="2864" class="Comment">-- empty-reduction (cancel≅ (x ∷ l) r .nil _ () defmf)</a>
-<a id="2919" class="Comment">-- empty-reduction (swap≅ x nil r .nil _ () defmf)</a>
-<a id="2970" class="Comment">-- empty-reduction (swap≅ x (x₁ ∷ l) r .nil _ () defmf)</a>
-<a id="3026" class="Comment">-- empty-reduction (long≅ k nil r .nil mf () defmf)</a>
-<a id="3078" class="Comment">-- empty-reduction (long≅ k (x ∷ l) r .nil mf () defmf)</a>
-
-<a id="3135" class="Comment">-- one-reduction : {x : ℕ} -&gt; {m : Listℕ} -&gt; ([ x ] ≅ m) -&gt; ⊥</a>
-<a id="3197" class="Comment">-- one-reduction {x} (cancel≅ (x₁ ∷ nil) r .(x ∷ nil) mf () defmf)</a>
-<a id="3264" class="Comment">-- one-reduction {x} (cancel≅ (x₁ ∷ x₂ ∷ l) r .(x ∷ nil) mf () defmf)</a>
-<a id="3334" class="Comment">-- one-reduction {x} (swap≅ x₁ (x₂ ∷ nil) r .(x ∷ nil) mf () defmf)</a>
-<a id="3402" class="Comment">-- one-reduction {x} (swap≅ x₁ (x₂ ∷ x₃ ∷ l) r .(x ∷ nil) mf () defmf)</a>
-<a id="3473" class="Comment">-- one-reduction {x} (long≅ k (x₁ ∷ nil) r .(x ∷ nil) mf () defmf)</a>
-<a id="3540" class="Comment">-- one-reduction {x} (long≅ k (x₁ ∷ x₂ ∷ l) r .(x ∷ nil) mf () defmf)</a></pre></body></html>
+</pre></body></html>
