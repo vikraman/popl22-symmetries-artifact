@@ -16,7 +16,7 @@ todos: $(AGDA_SRCS)
 		-exec grep -E -n --colour=auto 'TODO' {} \+
 
 cloc:
-    cloc Pi/
+	cloc Pi/
 
 clean:
 	rm -f $(AGDA_BINS)
