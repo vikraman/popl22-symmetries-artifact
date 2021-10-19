@@ -79,7 +79,7 @@ To step through the proofs and examples interactively, one has to use the intera
 Emacs and VSCode. To use it:
 
  - In Emacs, simply use `agda-mode locate` and load the file to get the major mode for Agda. Use `C-c C-l` to load the
-   Agda file, and `C-u C-u C-c C-n` to compute the normal form of a term.
+   Agda file, and `C-u C-c C-n` to compute the normal form of a term.
 
  - In VSCode, install `agda-mode` extension and point it to the location of Agda executable in your system. The usage
    instructions are provided in the extension's documentation. To load the file, use `C-c C-l`. After loading the file,
@@ -239,7 +239,7 @@ examples are written in such a way that they _will compute_ (with some caveats).
 
 The files are more-or-less self-documented -- we define each reversible circuit, compute their normal forms, then quote
 them back, step-by-step using the semantics. One can inspect each term using Agda's interactive mode, using the "Compute
-Normal Form" command (in Emacs, make sure to add `C-u C-u` to compute the most normalised form).
+Normal Form" command (in Emacs, make sure to add `C-u` to compute the most normalised form).
 
 Note that computing normal forms for some circuits can be _really slow_.
 
